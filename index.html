@@ -15,38 +15,47 @@
 
   <style>
     :root {
-      --brand-deep:   #0E494E;
-      --brand-deep-2: #0A3539;
-      --green:        #22C55E;
-      --green-2:      #16A34A;
-      --green-3:      #15803D;
-      --green-soft:   #DCFCE7;
-      --green-pale:   #F0FDF4;
-      --green-mint:   #ECFDF5;
+      /* Primary — Teal */
+      --brand-deep:   #0E494E;   /* Brand */
+      --brand-deep-2: #0A3539;   /* Darker shade */
+      --green:        #14686F;   /* Brand-2 (hover/secondary) */
+      --green-2:      #1F8A92;   /* Brand-light (highlights) */
+      --green-3:      #0E494E;   /* Brand (deep teal) */
+      --green-soft:   #D6ECEE;   /* Brand-50 (tinted surfaces) */
+      --green-pale:   #F5F7F7;   /* Surface */
+      --green-mint:   #D6ECEE;
 
-      --purple:       #A855F7;
-      --purple-2:     #9333EA;
-      --purple-soft:  #F5F3FF;
-      --purple-pale:  #FAF5FF;
+      /* Accent — Violet */
+      --purple:       #8B5CF6;   /* Accent */
+      --purple-2:     #6D28D9;   /* Accent-deep */
+      --purple-soft:  #F3EEFF;   /* Accent-50 */
+      --purple-pale:  #F3EEFF;
 
       --beige:        #FEF3C7;
       --beige-soft:   #FFFBEB;
 
-      --text:         #0F172A;
+      /* Neutrals */
+      --text:         #0D2024;
       --text-2:       #334155;
-      --muted:        #64748B;
+      --muted:        #5B7479;
       --muted-2:      #94A3B8;
 
       --bg:           #FFFFFF;
-      --bg-2:         #F9FAFB;
+      --bg-2:         #F5F7F7;
       --bg-3:         #F1F5F9;
-      --border:       #E5E7EB;
-      --border-2:     #F1F5F9;
+      --border:       #E3EAEB;
+      --border-2:     #E3EAEB;
 
-      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-      --shadow-md: 0 12px 28px -10px rgba(15, 23, 42, 0.12);
-      --shadow-lg: 0 30px 60px -20px rgba(15, 23, 42, 0.20);
-      --shadow-phone: 0 28px 50px -10px rgba(15, 23, 42, 0.22), 0 8px 18px -4px rgba(15, 23, 42, 0.10);
+      /* Semantic */
+      --success:      #16A34A;
+      --warning:      #F59E0B;
+      --danger:       #DC2626;
+      --info:         #0EA5E9;
+
+      --shadow-sm: 0 1px 2px rgba(13, 32, 36, 0.04);
+      --shadow-md: 0 12px 28px -10px rgba(13, 32, 36, 0.12);
+      --shadow-lg: 0 30px 60px -20px rgba(13, 32, 36, 0.20);
+      --shadow-phone: 0 28px 50px -10px rgba(13, 32, 36, 0.22), 0 8px 18px -4px rgba(13, 32, 36, 0.10);
 
       --radius: 20px;
       --radius-sm: 12px;
@@ -141,7 +150,7 @@
       font-weight: 700;
       font-size: 14.5px;
       transition: background 0.15s ease, transform 0.05s ease;
-      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+      box-shadow: 0 4px 12px rgba(31, 138, 146, 0.25);
     }
     .nav-cta:hover { background: var(--green-2); }
     .nav-cta:active { transform: scale(0.98); }
@@ -157,7 +166,7 @@
       position: absolute;
       top: -120px; right: -120px;
       width: 480px; height: 480px;
-      background: radial-gradient(circle, rgba(34, 197, 94, 0.10), transparent 70%);
+      background: radial-gradient(circle, rgba(31, 138, 146, 0.10), transparent 70%);
       pointer-events: none;
     }
     .hero-grid {
@@ -223,11 +232,11 @@
       gap: 12px;
       padding: 12px 20px;
       border-radius: 14px;
-      background: #0F172A;
+      background: var(--text);
       color: #fff !important;
       transition: transform 0.05s ease, background 0.15s ease;
     }
-    .store-btn:hover { background: #1E293B; }
+    .store-btn:hover { background: var(--brand-deep); }
     .store-btn:active { transform: scale(0.98); }
     .store-btn .store-sub {
       display: block;
@@ -290,7 +299,7 @@
       position: absolute;
       width: 540px; height: 540px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(34, 197, 94, 0.12), transparent 65%);
+      background: radial-gradient(circle, rgba(31, 138, 146, 0.12), transparent 65%);
       z-index: 0;
     }
     .deco-curve {
@@ -306,47 +315,19 @@
       position: absolute;
       width: 240px;
       height: 500px;
-      background: #0F172A;
-      box-shadow: var(--shadow-phone);
-      z-index: 2;
-    }
-    /* iOS: rounder body, screenshot's native Dynamic Island shows through */
-    .phone.ios {
+      background: var(--text);
       border-radius: 38px;
       padding: 7px;
-    }
-    /* Android: slightly less rounded, dark top bezel masks iOS chrome from screenshot, punch-hole camera */
-    .phone.android {
-      border-radius: 26px;
-      padding: 6px 6px 6px;
-    }
-    .phone.android::before {
-      content: "";
-      position: absolute;
-      top: 6px; left: 6px; right: 6px;
-      height: 26px;
-      background: #0F172A;
-      border-radius: 20px 20px 0 0;
-      z-index: 3;
-    }
-    .phone.android::after {
-      content: "";
-      position: absolute;
-      top: 14px; left: 50%;
-      transform: translateX(-50%);
-      width: 9px; height: 9px;
-      background: #1F2937;
-      border-radius: 50%;
-      z-index: 4;
+      box-shadow: var(--shadow-phone);
+      z-index: 2;
     }
     .ph-screen {
       width: 100%; height: 100%;
       background: #FFFFFF;
+      border-radius: 32px;
       overflow: hidden;
       position: relative;
     }
-    .phone.ios .ph-screen { border-radius: 32px; }
-    .phone.android .ph-screen { border-radius: 20px; }
     .phone-img {
       display: block;
       width: 100%;
@@ -383,7 +364,7 @@
     }
     .trust-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 32px;
     }
     .trust-item {
@@ -480,7 +461,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       font-weight: 800; font-size: 12px;
       border: 3px solid #fff;
-      box-shadow: 0 2px 6px rgba(34,197,94,0.3);
+      box-shadow: 0 2px 6px rgba(31,138,146,0.3);
     }
     .step h3 {
       font-size: 16.5px;
@@ -590,7 +571,7 @@
     .pass.hl {
       background: var(--green-mint);
       border-color: var(--green);
-      box-shadow: 0 12px 28px -10px rgba(34, 197, 94, 0.30);
+      box-shadow: 0 12px 28px -10px rgba(31, 138, 146, 0.30);
     }
     .pass-badge {
       position: absolute;
@@ -604,7 +585,7 @@
       border-radius: 999px;
       letter-spacing: 0.3px;
       white-space: nowrap;
-      box-shadow: 0 4px 10px rgba(34,197,94,0.35);
+      box-shadow: 0 4px 10px rgba(31,138,146,0.35);
     }
     .pass.hl .pass-cta { background: var(--green-3); }
     .pass.hl .pass-cta:hover { background: #14532D; }
@@ -956,16 +937,16 @@
 
       <!-- Decorative curves -->
       <svg class="deco-curve left" viewBox="0 0 100 80" fill="none">
-        <path d="M5 70 Q 20 20 80 30" stroke="#22C55E" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
-        <circle cx="80" cy="30" r="3" fill="#22C55E"/>
+        <path d="M5 70 Q 20 20 80 30" stroke="#1F8A92" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
+        <circle cx="80" cy="30" r="3" fill="#1F8A92"/>
       </svg>
       <svg class="deco-curve right" viewBox="0 0 80 80" fill="none">
-        <path d="M70 10 L 60 5 M 70 10 L 75 20" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
-        <line x1="50" y1="30" x2="60" y2="20" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <path d="M70 10 L 60 5 M 70 10 L 75 20" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
+        <line x1="50" y1="30" x2="60" y2="20" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
       </svg>
       <svg class="deco-curve bot" viewBox="0 0 60 60" fill="none">
-        <circle cx="20" cy="20" r="3" fill="#22C55E" opacity="0.5"/>
-        <circle cx="40" cy="40" r="2" fill="#22C55E" opacity="0.5"/>
+        <circle cx="20" cy="20" r="3" fill="#1F8A92" opacity="0.5"/>
+        <circle cx="40" cy="40" r="2" fill="#1F8A92" opacity="0.5"/>
       </svg>
 
       <!-- Left phone — iOS -->
@@ -999,15 +980,6 @@
 <div class="container" id="features">
   <div class="trust" id="security">
     <div class="trust-grid">
-      <div class="trust-item">
-        <span class="trust-ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9.4 8 10 4.5-.6 8-5 8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>
-        </span>
-        <div class="trust-text">
-          <h4>Bank-level security</h4>
-          <p>Your data is encrypted and always protected.</p>
-        </div>
-      </div>
       <div class="trust-item">
         <span class="trust-ico">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
@@ -1095,10 +1067,10 @@
       <!-- Night Out Pass -->
       <div class="pass">
         <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <path d="M20 25 L80 25 L52 60 V85 H62 V90 H38 V85 H48 V60 Z" stroke="#16A34A" stroke-width="2.5" stroke-linejoin="round" fill="#FBBF24" fill-opacity="0.85"/>
-          <circle cx="74" cy="20" r="3" fill="#22C55E"/>
-          <path d="M65 12 L72 14" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
-          <path d="M30 18 L26 11" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 25 L80 25 L52 60 V85 H62 V90 H38 V85 H48 V60 Z" stroke="#14686F" stroke-width="2.5" stroke-linejoin="round" fill="#FBBF24" fill-opacity="0.85"/>
+          <circle cx="74" cy="20" r="3" fill="#1F8A92"/>
+          <path d="M65 12 L72 14" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
+          <path d="M30 18 L26 11" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <div class="pass-name">Night Out Pass</div>
         <p class="pass-desc">Perfect for dinners and one-off events.</p>
@@ -1115,12 +1087,12 @@
       <div class="pass hl">
         <span class="pass-badge">Best Value</span>
         <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <rect x="20" y="36" width="60" height="48" rx="6" fill="#FBBF24" stroke="#15803D" stroke-width="2.5"/>
-          <rect x="38" y="22" width="24" height="14" rx="3" fill="none" stroke="#15803D" stroke-width="2.5"/>
-          <line x1="20" y1="56" x2="80" y2="56" stroke="#15803D" stroke-width="2"/>
-          <line x1="50" y1="36" x2="50" y2="84" stroke="#15803D" stroke-width="1.5" stroke-dasharray="3 3"/>
-          <circle cx="32" cy="84" r="3" fill="#15803D"/>
-          <circle cx="68" cy="84" r="3" fill="#15803D"/>
+          <rect x="20" y="36" width="60" height="48" rx="6" fill="#FBBF24" stroke="#0E494E" stroke-width="2.5"/>
+          <rect x="38" y="22" width="24" height="14" rx="3" fill="none" stroke="#0E494E" stroke-width="2.5"/>
+          <line x1="20" y1="56" x2="80" y2="56" stroke="#0E494E" stroke-width="2"/>
+          <line x1="50" y1="36" x2="50" y2="84" stroke="#0E494E" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="32" cy="84" r="3" fill="#0E494E"/>
+          <circle cx="68" cy="84" r="3" fill="#0E494E"/>
         </svg>
         <div class="pass-name">Trip Pass</div>
         <p class="pass-desc">Ideal for trips and weekend getaways.</p>
@@ -1138,11 +1110,11 @@
       <!-- Explorer Pass — purple -->
       <div class="pass purple">
         <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="32" fill="#A855F7" fill-opacity="0.15" stroke="#9333EA" stroke-width="2.5"/>
-          <ellipse cx="50" cy="50" rx="14" ry="32" fill="none" stroke="#9333EA" stroke-width="2"/>
-          <line x1="18" y1="50" x2="82" y2="50" stroke="#9333EA" stroke-width="2"/>
-          <path d="M28 36 Q 50 30 72 36" stroke="#9333EA" stroke-width="1.6" fill="none"/>
-          <path d="M28 64 Q 50 70 72 64" stroke="#9333EA" stroke-width="1.6" fill="none"/>
+          <circle cx="50" cy="50" r="32" fill="#8B5CF6" fill-opacity="0.15" stroke="#6D28D9" stroke-width="2.5"/>
+          <ellipse cx="50" cy="50" rx="14" ry="32" fill="none" stroke="#6D28D9" stroke-width="2"/>
+          <line x1="18" y1="50" x2="82" y2="50" stroke="#6D28D9" stroke-width="2"/>
+          <path d="M28 36 Q 50 30 72 36" stroke="#6D28D9" stroke-width="1.6" fill="none"/>
+          <path d="M28 64 Q 50 70 72 64" stroke="#6D28D9" stroke-width="1.6" fill="none"/>
         </svg>
         <div class="pass-name">Explorer Pass</div>
         <p class="pass-desc">For power users and frequent travelers.</p>
@@ -1237,15 +1209,15 @@
       <svg class="cta-illust" viewBox="0 0 280 160" fill="none" aria-hidden="true">
         <!-- left person -->
         <circle cx="60" cy="55" r="14" fill="#1F2937"/>
-        <path d="M40 130 Q 40 88 60 88 Q 80 88 80 130 Z" fill="#22C55E"/>
-        <rect x="38" y="118" width="44" height="20" rx="3" fill="#15803D"/>
+        <path d="M40 130 Q 40 88 60 88 Q 80 88 80 130 Z" fill="#1F8A92"/>
+        <rect x="38" y="118" width="44" height="20" rx="3" fill="#0E494E"/>
         <path d="M70 70 L85 50" stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
         <circle cx="88" cy="48" r="5" fill="#FBBF24"/>
 
         <!-- middle person -->
         <circle cx="140" cy="50" r="14" fill="#374151"/>
         <path d="M120 130 Q 120 80 140 80 Q 160 80 160 130 Z" fill="#86EFAC"/>
-        <rect x="118" y="118" width="44" height="20" rx="3" fill="#22C55E"/>
+        <rect x="118" y="118" width="44" height="20" rx="3" fill="#1F8A92"/>
         <path d="M122 65 L100 48" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
         <path d="M158 65 L182 48" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
         <circle cx="98" cy="46" r="5" fill="#FBBF24"/>
@@ -1259,10 +1231,10 @@
         <circle cx="192" cy="48" r="5" fill="#FBBF24"/>
 
         <!-- spark accents -->
-        <path d="M30 30 L36 30 M33 27 L33 33" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
-        <path d="M254 36 L260 36 M257 33 L257 39" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="248" cy="14" r="2" fill="#22C55E"/>
-        <circle cx="20" cy="100" r="2" fill="#22C55E"/>
+        <path d="M30 30 L36 30 M33 27 L33 33" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
+        <path d="M254 36 L260 36 M257 33 L257 39" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="248" cy="14" r="2" fill="#1F8A92"/>
+        <circle cx="20" cy="100" r="2" fill="#1F8A92"/>
       </svg>
       <div class="cta-text">
         <h2>Ready to make splitting simple?</h2>
