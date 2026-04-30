@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>Join group on Tally</title>
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root {
+      --brand: #0E494E;
+      --brand-2: #14686f;
+      --bg: #f5f7f7;
+      --text: #0d2024;
+      --muted: #5b7479;
+      --card: #ffffff;
+      --border: #e3eaeb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(160deg, #eaf2f3 0%, #f8fafa 100%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 28px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 12px 30px rgba(14, 73, 78, 0.08);
+      text-align: center;
+    }
+    .logo {
+      width: 72px; height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      background: var(--brand);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 32px; letter-spacing: -1px;
+    }
+    h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    p.lede { color: var(--muted); font-size: 15px; line-height: 1.45; margin-bottom: 22px; }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.05s ease, background 0.15s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-primary:hover { background: var(--brand-2); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--brand);
+      border: 1px solid var(--border);
+    }
+    .row { display: flex; gap: 10px; margin-top: 12px; }
+    .row .btn { flex: 1; padding: 12px; font-size: 14px; }
+    .hint { margin-top: 16px; font-size: 12px; color: var(--muted); }
+    .token { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--muted); margin-top: 18px; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <div class="logo" aria-hidden="true">T</div>
+    <h1>You're invited to a group on Tally</h1>
+    <p class="lede">Open the app to accept the invite and start splitting expenses with your friends.</p>
+
+    <a id="open" class="btn btn-primary" href="#">Open in Tally</a>
+
+    <div class="row">
+      <a id="ios" class="btn btn-ghost" href="https://apps.apple.com/app/id0000000000" target="_blank" rel="noopener">App Store</a>
+      <a id="android" class="btn btn-ghost" href="https://play.google.com/store/apps/details?id=com.payamqorbanpour.tally" target="_blank" rel="noopener">Google Play</a>
+    </div>
+
+    <p class="hint">If the app didn't open automatically, tap "Open in Tally" above.</p>
+    <p class="token" id="tokenLine"></p>
+  </main>
+
+  <script>
+    (function () {
+      // URL is /join/<token> rewritten to /join.html — read token from path.
+      var path = window.location.pathname.replace(/\/+$/, "");
+      var parts = path.split("/").filter(Boolean);
+      var token = parts[parts.length - 1] === "join.html"
+        ? null
+        : parts[parts.length - 1] || null;
+
+      if (!token) {
+        document.querySelector("h1").textContent = "Invalid invite link";
+        document.querySelector(".lede").textContent = "This invite link is missing its token. Ask your friend to resend it.";
+        document.getElementById("open").style.display = "none";
+        return;
+      }
+
+      var deepLink = "tally://group-invite?token=" + encodeURIComponent(token);
+      document.getElementById("open").setAttribute("href", deepLink);
+      document.getElementById("tokenLine").textContent = "Token: " + token;
+
+      // Try to launch the app on first paint. iOS Universal Links (when AASA is
+      // verified) intercept this URL before the page even renders, so this code
+      // mainly serves users without the app installed and Android users.
+      var attempted = false;
+      function tryOpen() {
+        if (attempted) return;
+        attempted = true;
+        window.location.href = deepLink;
+      }
+      // Slight delay so the page has rendered and back-button works if app is missing.
+      setTimeout(tryOpen, 250);
+    })();
+  </script>
+</body>
+</html>

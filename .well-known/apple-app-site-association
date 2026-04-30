@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TEAMID.com.payamqorbanpour.tally"],
+        "components": [
+          { "/": "/join/*", "comment": "Group invite landing" },
+          { "/": "/expense/*", "comment": "Expense invite landing" }
+        ]
+      }
+    ]
+  }
+}
