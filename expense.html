@@ -77,8 +77,8 @@
 <body>
   <main class="card" role="main">
     <div class="logo" aria-hidden="true">T</div>
-    <h1>Shared expense on Tally</h1>
-    <p class="lede">Open the app to view this expense and settle up with your group.</p>
+    <h1 id="title">Shared expense on Tally</h1>
+    <p class="lede" id="lede">Open the app to view this expense and settle up with your group. If you're not in the group yet, Tally will add you.</p>
 
     <a id="open" class="btn btn-primary" href="#">Open in Tally</a>
 
@@ -99,16 +99,27 @@
         ? null
         : parts[parts.length - 1] || null;
 
+      // Optional ?g=<group_token> (alias: ?group=) — passed through so the
+      // app can add the user to the parent group as part of opening the
+      // expense, rather than relying on a separate group-invite step.
+      var qs = new URLSearchParams(window.location.search);
+      var groupToken = qs.get("g") || qs.get("group") || null;
+
       if (!id) {
-        document.querySelector("h1").textContent = "Invalid expense link";
-        document.querySelector(".lede").textContent = "This expense link is missing its id. Ask your friend to resend it.";
+        document.getElementById("title").textContent = "Invalid expense link";
+        document.getElementById("lede").textContent = "This expense link is missing its id. Ask your friend to resend it.";
         document.getElementById("open").style.display = "none";
         return;
       }
 
       var deepLink = "tally://expense-invite?id=" + encodeURIComponent(id);
+      var tokenLine = "Expense: " + id;
+      if (groupToken) {
+        deepLink += "&group=" + encodeURIComponent(groupToken);
+        tokenLine += " · Group token: " + groupToken;
+      }
       document.getElementById("open").setAttribute("href", deepLink);
-      document.getElementById("tokenLine").textContent = "Expense: " + id;
+      document.getElementById("tokenLine").textContent = tokenLine;
 
       var attempted = false;
       function tryOpen() {

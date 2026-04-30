@@ -1,389 +1,1635 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Pill FAB — Split expenses effortlessly</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Tally — Split expenses. Not friendships.</title>
+  <meta name="description" content="Tally helps groups track expenses, split fairly, and settle up in seconds. No spreadsheets. No awkwardness. Just simple." />
+  <meta name="theme-color" content="#22C55E" />
+  <link rel="icon" href="/favicon.ico" />
 
-        body {
-            background: linear-gradient(145deg, #f5f0ff 0%, #e8e0f5 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Inter', system-ui, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1.5rem;
-        }
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tally — Split expenses. Not friendships." />
+  <meta property="og:description" content="Track expenses, split fairly, and settle up in seconds. No spreadsheets. No awkwardness." />
 
-        /* main container */
-        .pricing-container {
-            max-width: 1300px;
-            width: 100%;
-            margin: 0 auto;
-        }
+  <style>
+    :root {
+      --green:        #22C55E;
+      --green-2:      #16A34A;
+      --green-3:      #15803D;
+      --green-soft:   #DCFCE7;
+      --green-pale:   #F0FDF4;
+      --green-mint:   #ECFDF5;
 
-        /* header text */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #1F2937 0%, #3b2e5e 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 0.5rem;
-        }
-        .header p {
-            font-size: 1.1rem;
-            color: #4b5563;
-            letter-spacing: -0.2px;
-        }
+      --purple:       #A855F7;
+      --purple-2:     #9333EA;
+      --purple-soft:  #F5F3FF;
+      --purple-pale:  #FAF5FF;
 
-        /* cards grid */
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
+      --beige:        #FEF3C7;
+      --beige-soft:   #FFFBEB;
 
-        /* base card style */
-        .card {
-            background: white;
-            border-radius: 1.5rem;
-            width: 100%;
-            max-width: 340px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.15);
-        }
+      --text:         #0F172A;
+      --text-2:       #334155;
+      --muted:        #64748B;
+      --muted-2:      #94A3B8;
 
-        /* top accent bar */
-        .card-accent {
-            height: 0.5rem;
-            border-top-left-radius: 1.5rem;
-            border-top-right-radius: 1.5rem;
-            width: 100%;
-        }
-        .accent-free { background: #9ca3af; }
-        .accent-popular { background: linear-gradient(90deg, #8B5CF6, #6D28D9); }
-        .accent-pro { background: #1F2937; }
+      --bg:           #FFFFFF;
+      --bg-2:         #F9FAFB;
+      --bg-3:         #F1F5F9;
+      --border:       #E5E7EB;
+      --border-2:     #F1F5F9;
 
-        /* popular badge */
-        .popular-badge {
-            position: absolute;
-            top: -0.75rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(95deg, #8B5CF6, #7C3AED);
-            padding: 0.3rem 1.2rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: white;
-            letter-spacing: 0.3px;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(107, 70, 193, 0.3);
-            z-index: 3;
-        }
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 12px 28px -10px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 30px 60px -20px rgba(15, 23, 42, 0.20);
+      --shadow-phone: 0 28px 50px -10px rgba(15, 23, 42, 0.22), 0 8px 18px -4px rgba(15, 23, 42, 0.10);
 
-        .card-inner {
-            padding: 1.8rem 1.5rem 2rem 1.5rem;
-        }
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-lg: 28px;
+    }
 
-        .plan-category {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05rem;
-            color: #6b7280;
-            margin-bottom: 0.75rem;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
 
-        .price {
-            display: flex;
-            align-items: baseline;
-            gap: 0.3rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.75rem;
-        }
-        .price-amount {
-            font-size: 2.25rem;
-            font-weight: 800;
-            color: #1f2937;
-            letter-spacing: -0.02em;
-        }
-        .price-period {
-            font-size: 0.9rem;
-            color: #6b7280;
-            font-weight: 500;
-        }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
 
-        .divider {
-            height: 1px;
-            background: #f0f0f0;
-            margin: 1rem 0 1.25rem 0;
-        }
+    /* ============== NAV ============== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 32px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .brand-mark {
+      width: 32px; height: 32px;
+      flex-shrink: 0;
+    }
+    .nav-mid {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-mid a {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: color 0.15s ease;
+    }
+    .nav-mid a:hover { color: var(--text); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+    .nav-login {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+    .nav-cta {
+      background: var(--green);
+      color: #fff !important;
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14.5px;
+      transition: background 0.15s ease, transform 0.05s ease;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+    }
+    .nav-cta:hover { background: var(--green-2); }
+    .nav-cta:active { transform: scale(0.98); }
 
-        .hero-text {
-            margin-bottom: 1.5rem;
-        }
-        .hero-title {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #1f2937;
-            margin-bottom: 0.25rem;
-        }
-        .hero-desc {
-            font-size: 0.8rem;
-            color: #6b7280;
-            line-height: 1.4;
-        }
+    /* ============== HERO ============== */
+    .hero {
+      position: relative;
+      padding: 60px 0 80px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.10), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .eyebrow .spark { color: var(--green); display: inline-flex; }
+    .hero h1 {
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.02;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+    .hero h1 .friend {
+      position: relative;
+      color: var(--green);
+      white-space: nowrap;
+    }
+    .hero h1 .friend::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -6px;
+      height: 8px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 5 Q 50 1 100 4 T 198 3' stroke='%2322C55E' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    .hero p.lede {
+      font-size: 17.5px;
+      line-height: 1.55;
+      color: var(--text-2);
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .store-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      background: #0F172A;
+      color: #fff !important;
+      transition: transform 0.05s ease, background 0.15s ease;
+    }
+    .store-btn:hover { background: #1E293B; }
+    .store-btn:active { transform: scale(0.98); }
+    .store-btn .store-sub {
+      display: block;
+      font-size: 10.5px;
+      letter-spacing: 0.4px;
+      opacity: 0.78;
+      text-transform: none;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .store-btn .store-name {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
 
-        .feature-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.85rem;
-            color: #374151;
-        }
-        .check {
-            width: 1.1rem;
-            height: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .check-green {
-            background: #10b981;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-        .check-purple {
-            background: #8b5cf6;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-        .check-dark {
-            background: #1f2937;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-        .check-muted {
-            background: #e5e7eb;
-            color: #9ca3af;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        .feature-off {
-            color: #9ca3af;
-        }
+    .social-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatars {
+      display: flex;
+    }
+    .avatars .av {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background: linear-gradient(135deg, #c4b5fd, #93c5fd);
+      margin-left: -10px;
+      background-size: cover;
+      background-position: center;
+    }
+    .avatars .av:first-child { margin-left: 0; }
+    .av-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+    .av-2 { background: linear-gradient(135deg, #34d399, #10b981); }
+    .av-3 { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+    .av-4 { background: linear-gradient(135deg, #f87171, #ec4899); }
+    .social-text { font-size: 13px; color: var(--text-2); font-weight: 500; line-height: 1.35; }
+    .social-stars {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .stars { display: inline-flex; gap: 1px; color: #FBBF24; }
+    .rating-num { font-size: 13px; color: var(--text-2); font-weight: 700; }
 
-        .highlight-box {
-            background: #f5f3ff;
-            padding: 0.7rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            margin-bottom: 1.8rem;
-        }
-        .highlight-text {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #6d28d9;
-        }
-        .highlight-sub {
-            font-size: 0.65rem;
-            color: #6b7280;
-        }
+    /* ============== PHONE STACK ============== */
+    .phone-stack {
+      position: relative;
+      height: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-stack::before {
+      content: "";
+      position: absolute;
+      width: 540px; height: 540px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.12), transparent 65%);
+      z-index: 0;
+    }
+    .deco-curve {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .deco-curve.left  { top: 30px; left: -20px; width: 120px; opacity: 0.4; }
+    .deco-curve.right { top: 60px; right: -10px; width: 80px; opacity: 0.4; }
+    .deco-curve.bot   { bottom: 80px; right: 20px; width: 60px; opacity: 0.5; }
 
-        .btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 0.85rem 0;
-            border-radius: 0.85rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-family: inherit;
-            text-decoration: none;
-        }
-        .btn-free {
-            background: #f3f4f6;
-            color: #1f2937;
-            border: 1px solid #e5e7eb;
-        }
-        .btn-free:hover {
-            background: #e5e7eb;
-        }
-        .btn-popular {
-            background: linear-gradient(95deg, #8B5CF6, #7C3AED);
-            color: white;
-            box-shadow: 0 6px 14px rgba(107, 70, 193, 0.25);
-        }
-        .btn-popular:hover {
-            transform: scale(0.98);
-            box-shadow: 0 2px 8px rgba(107, 70, 193, 0.3);
-        }
-        .btn-pro {
-            background: #1f2937;
-            color: white;
-        }
-        .btn-pro:hover {
-            background: #111827;
-        }
+    .phone {
+      position: absolute;
+      width: 240px;
+      height: 500px;
+      background: #0F172A;
+      border-radius: 38px;
+      padding: 9px;
+      box-shadow: var(--shadow-phone);
+      z-index: 2;
+    }
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 18px; left: 50%;
+      transform: translateX(-50%);
+      width: 78px; height: 22px;
+      background: #0F172A;
+      border-radius: 999px;
+      z-index: 4;
+    }
+    .ph-screen {
+      width: 100%; height: 100%;
+      background: #FFFFFF;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      padding: 44px 14px 14px;
+    }
+    .ph-status {
+      position: absolute;
+      top: 18px; left: 0; right: 0;
+      display: flex; justify-content: space-between;
+      padding: 0 22px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .ph-status .right { display: inline-flex; gap: 4px; align-items: center; opacity: 0.85; }
 
-        .footer-note {
-            text-align: center;
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #6c757d;
-        }
-        .brand {
-            margin-top: 1rem;
-            text-align: center;
-            font-weight: 600;
-            letter-spacing: 2px;
-            font-size: 0.7rem;
-            color: #c9b6e9;
-        }
+    /* Left phone — Add expense */
+    .phone.left  { left: 0;   top: 30px; transform: rotate(-7deg); z-index: 1; }
+    .phone.right { right: 0;  top: 30px; transform: rotate(7deg);  z-index: 1; }
+    .phone.center { z-index: 3; }
 
-        @media (max-width: 760px) {
-            body {
-                padding: 1.5rem;
-            }
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .cards {
-                gap: 1.5rem;
-            }
-        }
-    </style>
+    .ae-back { font-size: 14px; color: var(--text); margin-bottom: 4px; opacity: 0.7; }
+    .ae-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+    .ae-amount-card {
+      background: #fff;
+      border: 1px solid var(--border-2);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: right;
+      margin-bottom: 16px;
+    }
+    .ae-amount-card .lbl { font-size: 9px; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.4px; text-transform: uppercase; text-align: left; }
+    .ae-amount-card .val { font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -0.6px; }
+    .ae-amount-card .val .cur { font-size: 12px; font-weight: 700; color: var(--muted); margin-right: 4px; }
+    .ae-row {
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border-2);
+      font-size: 11px;
+      color: var(--text-2);
+    }
+    .ae-row strong { display: block; color: var(--text); font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+    .ae-section {
+      font-size: 9px; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin: 12px 0 6px; font-weight: 700;
+    }
+    .ae-split {
+      display: flex; gap: 4px; margin-bottom: 10px;
+    }
+    .ae-split .pill {
+      flex: 1;
+      padding: 6px 4px;
+      border-radius: 8px;
+      background: var(--bg-2);
+      font-size: 9px; font-weight: 700;
+      text-align: center;
+      color: var(--muted);
+      border: 1px solid var(--border-2);
+    }
+    .ae-split .pill.on {
+      background: var(--green-soft);
+      color: var(--green-3);
+      border-color: var(--green);
+    }
+    .ae-people { display: flex; flex-direction: column; gap: 6px; }
+    .ae-person { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text); font-weight: 600; }
+    .ae-person .av {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      flex-shrink: 0;
+    }
+    .ae-person:nth-child(2) .av { background: linear-gradient(135deg, #34d399, #10b981); }
+    .ae-person:nth-child(3) .av { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+    .ae-person:nth-child(4) .av { background: linear-gradient(135deg, #f87171, #ec4899); }
+
+    /* Center phone — Tally home */
+    .ch-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .ch-title { font-size: 18px; font-weight: 800; letter-spacing: -0.4px; }
+    .ch-icons { display: inline-flex; gap: 8px; align-items: center; }
+    .ch-bell {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--bg-2);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .ch-pic {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    }
+    .ch-banner {
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      color: #fff;
+      border-radius: 14px;
+      padding: 14px 14px 16px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ch-banner .lbl { font-size: 11px; opacity: 0.86; margin-bottom: 4px; }
+    .ch-banner .val { font-size: 22px; font-weight: 800; letter-spacing: -0.6px; }
+    .ch-banner .sub { font-size: 11px; opacity: 0.86; margin-top: 6px; }
+    .ch-banner .wallet {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 12px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .ch-mini-row {
+      display: flex; gap: 8px; margin-bottom: 14px;
+    }
+    .ch-mini {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .ch-mini .lbl { font-size: 9px; color: var(--muted); margin-bottom: 2px; }
+    .ch-mini .val { font-size: 12px; font-weight: 800; color: var(--green-3); }
+    .ch-mini.owed .val { color: var(--green-3); }
+    .ch-mini.owe .val { color: var(--text); }
+    .ch-mini .ic {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .ch-mini.owe .ic { background: #FEE2E2; }
+    .ch-section-row {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+    }
+    .ch-section-title { font-size: 11px; font-weight: 800; color: var(--text); }
+    .ch-section-link { font-size: 10px; color: var(--green-3); font-weight: 600; }
+    .ch-group {
+      background: #fff;
+      border: 1px solid var(--border-2);
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+    .ch-group-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .ch-group-icon {
+      width: 26px; height: 26px;
+      background: var(--green-soft);
+      border-radius: 7px;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ch-group-body { flex: 1; min-width: 0; }
+    .ch-group-name { font-size: 11px; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .ch-group-meta { font-size: 9px; color: var(--muted); margin-top: 1px; }
+    .ch-group-meta .ow { color: var(--green-3); font-weight: 700; }
+    .ch-mems { display: flex; }
+    .ch-mems .mem {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid #fff;
+      margin-left: -5px;
+      font-size: 8px; font-weight: 700;
+      color: var(--text);
+      background: var(--bg-3);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .ch-mems .mem:first-child { margin-left: 0; }
+    .ch-mems .mem.plus { background: var(--green); color: #fff; }
+    .ch-tabbar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50px;
+      background: #fff;
+      border-top: 1px solid var(--border-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 8px;
+    }
+    .ch-tabbar .tab { font-size: 8px; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .ch-tabbar .tab.add {
+      width: 38px; height: 38px;
+      background: var(--green);
+      border-radius: 50%;
+      color: #fff;
+      align-items: center; justify-content: center;
+      box-shadow: 0 6px 12px rgba(34,197,94,0.4);
+      margin-top: -16px;
+    }
+
+    /* Right phone — AI Receipt */
+    .ar-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .ar-title { font-size: 14px; font-weight: 800; }
+    .ar-prem-pill {
+      font-size: 9px; font-weight: 800;
+      color: var(--green-3);
+      background: var(--green-soft);
+      padding: 3px 7px;
+      border-radius: 999px;
+      letter-spacing: 0.3px;
+    }
+    .ar-section { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .ar-inputs { display: flex; gap: 6px; margin-bottom: 14px; }
+    .ar-input {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
+      padding: 12px 4px 8px;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .ar-input.on { background: var(--green-soft); border-color: var(--green); color: var(--green-3); }
+    .ar-input .ic {
+      display: block;
+      margin: 0 auto 6px;
+      width: 22px; height: 22px;
+    }
+    .ar-section-2 { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .ar-list-item {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 8px;
+      background: #fff;
+      border: 1px solid var(--border-2);
+      border-radius: 8px;
+      margin-bottom: 5px;
+    }
+    .ar-list-item .ic {
+      width: 18px; height: 18px;
+      border-radius: 5px;
+      background: var(--green-soft);
+      flex-shrink: 0;
+    }
+    .ar-list-item .body { flex: 1; min-width: 0; font-size: 9px; font-weight: 600; color: var(--text); }
+    .ar-list-item .body small { display: block; font-size: 7px; color: var(--muted); font-weight: 500; }
+    .ar-list-item .amt { font-size: 9px; font-weight: 800; color: var(--text); }
+    .ar-total {
+      display: flex; justify-content: space-between;
+      padding: 8px 10px;
+      background: var(--bg-2);
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+    .ar-cta {
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* ============== TRUST STRIP ============== */
+    .trust {
+      background: var(--bg-2);
+      border-radius: 24px;
+      padding: 32px 36px;
+      margin: 0 auto;
+      max-width: 1180px;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .trust-ico {
+      width: 44px; height: 44px;
+      background: var(--green-soft);
+      color: var(--green-3);
+      border-radius: 12px;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-text h4 { font-size: 14.5px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: -0.2px; }
+    .trust-text p { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+    /* ============== SECTION HEAD ============== */
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+    .section-head h2 {
+      font-size: clamp(28px, 3.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .section-head p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    section.block { padding: 96px 0; }
+
+    /* ============== HOW IT WORKS ============== */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      align-items: start;
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 38px;
+      left: calc(50% + 50px);
+      right: calc(-50% + 50px);
+      height: 2px;
+      background-image: linear-gradient(to right, var(--muted-2) 50%, transparent 50%);
+      background-size: 8px 2px;
+      background-repeat: repeat-x;
+      pointer-events: none;
+    }
+    .step::before {
+      content: "";
+      position: absolute;
+      top: 32px;
+      right: calc(-50% + 56px);
+      width: 14px; height: 14px;
+      transform: rotate(-45deg);
+      border-right: 2px solid var(--muted-2);
+      border-top: 2px solid var(--muted-2);
+      pointer-events: none;
+    }
+    .step:last-child::before { display: none; }
+    .step-ico {
+      width: 80px; height: 80px;
+      margin: 0 auto 14px;
+      border-radius: 24px;
+      background: var(--green-pale);
+      color: var(--green-3);
+      display: inline-flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .step-num {
+      position: absolute;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      width: 26px; height: 26px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 12px;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 6px rgba(34,197,94,0.3);
+    }
+    .step h3 {
+      font-size: 16.5px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin: 16px 0 8px;
+      color: var(--text);
+    }
+    .step p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* ============== PRICING ============== */
+    .passes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 0.78fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .pass {
+      position: relative;
+      background: var(--green-pale);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius);
+      padding: 26px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .pass-illustration {
+      position: absolute;
+      right: 16px; top: 22px;
+      width: 70px; height: 70px;
+      pointer-events: none;
+    }
+    .pass-name {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--green-3);
+      margin-bottom: 10px;
+    }
+    .pass-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.45;
+      margin-bottom: 18px;
+      max-width: 160px;
+    }
+    .pass-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .pass-price .amt {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+    }
+    .pass-price .per {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .pass-features {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+    .pass-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.45;
+    }
+    .pass-features svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--green);
+    }
+    .pass-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14.5px;
+      background: var(--green);
+      color: #fff;
+      transition: background 0.15s ease, transform 0.05s ease;
+      margin-top: auto;
+    }
+    .pass-cta:hover { background: var(--green-2); }
+    .pass-cta:active { transform: scale(0.98); }
+
+    /* Trip Pass — highlighted */
+    .pass.hl {
+      background: var(--green-mint);
+      border-color: var(--green);
+      box-shadow: 0 12px 28px -10px rgba(34, 197, 94, 0.30);
+    }
+    .pass-badge {
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(34,197,94,0.35);
+    }
+    .pass.hl .pass-cta { background: var(--green-3); }
+    .pass.hl .pass-cta:hover { background: #14532D; }
+
+    /* Explorer — purple */
+    .pass.purple {
+      background: var(--purple-soft);
+      border-color: transparent;
+    }
+    .pass.purple .pass-name { color: var(--purple-2); }
+    .pass.purple .pass-features svg { color: var(--purple); }
+    .pass.purple .pass-cta { background: var(--purple); }
+    .pass.purple .pass-cta:hover { background: var(--purple-2); }
+
+    /* Add-on — narrower, beige */
+    .addon {
+      background: var(--beige-soft);
+      border: 1.5px solid #FDE68A;
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .addon-label {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #B45309;
+      margin-bottom: 4px;
+    }
+    .addon-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.4px;
+    }
+    .addon-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.45;
+    }
+    .addon-price-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .addon-price-info {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+    .addon-price-info strong { display: block; font-size: 22px; font-weight: 800; color: var(--text); margin-top: 2px; letter-spacing: -0.6px; }
+    .addon-illust {
+      width: 50px; height: 50px;
+      flex-shrink: 0;
+    }
+    .addon-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      background: var(--bg-3);
+      color: var(--text);
+      transition: background 0.15s ease;
+      margin-top: auto;
+    }
+    .addon-cta:hover { background: #E2E8F0; }
+
+    /* ============== FAQ ============== */
+    .faq {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq details {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding: 4px 22px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s ease;
+    }
+    .faq details[open] { border-color: var(--green); background: var(--green-pale); }
+    .faq summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--green);
+      transition: transform 0.2s ease;
+    }
+    .faq details[open] summary::after { content: "−"; }
+    .faq .answer {
+      padding: 0 0 18px;
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ============== CTA BANNER ============== */
+    .cta {
+      background: var(--green-soft);
+      border-radius: 24px;
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .cta-illust {
+      flex-shrink: 0;
+      width: 280px;
+    }
+    .cta-text { flex: 1; min-width: 260px; }
+    .cta-text h2 {
+      font-size: clamp(22px, 2.4vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .cta-text p {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.5;
+      max-width: 460px;
+    }
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .cta-actions .nav-cta { padding: 14px 28px; font-size: 15px; }
+    .cta-actions .free-line {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ============== FOOTER ============== */
+    footer {
+      padding: 48px 0 36px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .foot-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .foot-brand p { font-size: 13.5px; color: var(--muted); margin-top: 14px; max-width: 280px; line-height: 1.55; }
+    .foot-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+    .foot-col h4 {
+      font-size: 12px; font-weight: 800;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--text); margin-bottom: 14px;
+    }
+    .foot-col a {
+      display: block; font-size: 14px; color: var(--muted);
+      margin-bottom: 10px; transition: color 0.15s ease;
+    }
+    .foot-col a:hover { color: var(--green-3); }
+    .foot-bottom {
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ============== RESPONSIVE ============== */
+    @media (max-width: 1100px) {
+      .passes-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 960px) {
+      .nav-mid { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .phone-stack { height: 540px; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 36px 12px; }
+      .step:nth-child(2)::before, .step:nth-child(2)::after { display: none; }
+      section.block { padding: 72px 0; }
+    }
+    @media (max-width: 700px) {
+      .nav-login { display: none; }
+      .passes-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .step::before, .step::after { display: none; }
+      .cta { padding: 28px; flex-direction: column; align-items: flex-start; }
+      .cta-actions { align-items: flex-start; }
+      .phone { width: 200px; height: 420px; }
+      .phone-stack { height: 460px; }
+      .trust { padding: 24px 22px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 18px; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 40px; }
+    }
+  </style>
 </head>
 <body>
-<div class="pricing-container">
-    <div class="header">
-        <h1>Simple pricing that grows with you</h1>
-        <p>No surprise fees. Cancel anytime. Upgrade when you need more.</p>
-    </div>
 
-    <div class="cards">
-        <!-- CARD 1: FREE (always free) -->
-        <div class="card">
-            <div class="card-accent accent-free"></div>
-            <div class="card-inner">
-                <div class="plan-category">FREE PLAN</div>
-                <div class="price">
-                    <span class="price-amount">Free</span>
-                    <span class="price-period">forever</span>
-                </div>
-                <div class="divider"></div>
-                <div class="hero-text">
-                    <div class="hero-title">Split with friends — free</div>
-                    <div class="hero-desc">Perfect for casual groups and simple meals out.</div>
-                </div>
-                <div class="feature-list">
-                    <div class="feature"><span class="check check-green">✓</span> Unlimited manual expenses</div>
-                    <div class="feature"><span class="check check-green">✓</span> Basic groups & equal splits</div>
-                    <div class="feature"><span class="check check-green">✓</span> See who owes who</div>
-                    <div class="feature feature-off"><span class="check check-muted">✗</span> AI receipt scanning</div>
-                    <div class="feature feature-off"><span class="check check-muted">✗</span> Cloud sync</div>
-                </div>
-                <a href="#" class="btn btn-free">Start Free →</a>
-            </div>
+<!-- ============================== NAV ============================== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="brand" aria-label="Tally home">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="3" y="6" width="13" height="3" rx="1.5" fill="#22C55E"/>
+        <rect x="3" y="12" width="20" height="3" rx="1.5" fill="#22C55E"/>
+        <rect x="3" y="18" width="9" height="3" rx="1.5" fill="#22C55E"/>
+        <rect x="3" y="24" width="16" height="3" rx="1.5" fill="#22C55E"/>
+        <circle cx="26" cy="7.5" r="2.2" fill="#16A34A"/>
+        <circle cx="26" cy="13.5" r="2.2" fill="#16A34A"/>
+      </svg>
+      <span>Tally</span>
+    </a>
+    <nav class="nav-mid">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#passes">Passes</a>
+      <a href="#security">Security</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" class="nav-login">Log in</a>
+      <a href="#get" class="nav-cta">Get Tally Free</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">
+        <span class="spark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2zm6 12l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1 1-2.4z"/></svg>
+        </span>
+        The intelligent way to split expenses
+      </span>
+      <h1>Split expenses.<br>Not <span class="friend">friendships</span>.</h1>
+      <p class="lede">Tally helps groups track expenses, split fairly, and settle up in seconds. No spreadsheets. No awkwardness. Just simple.</p>
+      <div class="store-row" id="get">
+        <a class="store-btn" href="https://apps.apple.com/app/id0000000000" target="_blank" rel="noopener" aria-label="Download Tally on the App Store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 12.5c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.8 0-1.9-.9-3.1-.9-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.6.8 1.2 1.7 2.5 3 2.5 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.1.8c1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1-.1-2.6-1-2.6-3.6zM14 4.7c.7-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.2 1.9-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+          <span>
+            <span class="store-sub">Download on the</span>
+            <span class="store-name">App Store</span>
+          </span>
+        </a>
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.payamqorbanpour.tally" target="_blank" rel="noopener" aria-label="Get Tally on Google Play">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.7c-.4.4-.6 1-.6 1.7v17.2c0 .7.2 1.3.6 1.7L13.3 12 3.6 1.7zm10.8 11.1l2.7 2.7-10.5 6.1c-.5.3-1.1.3-1.6 0l9.4-8.8zm5-3.1l-3.3-1.9-3 3 3 3 3.3-1.9c1-.6 1-2.6 0-3.2zM4.6.9l10.5 6.1-2.7 2.7L4.6.9c.5-.3 1.1-.3 1.6 0z"/></svg>
+          <span>
+            <span class="store-sub">Get it on</span>
+            <span class="store-name">Google Play</span>
+          </span>
+        </a>
+      </div>
+      <div class="social-row">
+        <div class="avatars">
+          <span class="av av-1"></span>
+          <span class="av av-2"></span>
+          <span class="av av-3"></span>
+          <span class="av av-4"></span>
         </div>
-
-        <!-- CARD 2: PRO TRAVELER (MOST POPULAR) -->
-        <div class="card" style="border: 2px solid #8B5CF6;">
-            <div class="popular-badge">⭐ MOST POPULAR</div>
-            <div class="card-accent accent-popular"></div>
-            <div class="card-inner">
-                <div class="plan-category" style="color:#8B5CF6; font-weight:700;">PRO TRAVELER</div>
-                <div class="price">
-                    <span class="price-amount">$7.99</span>
-                    <span class="price-period">one-time / trip</span>
-                </div>
-                <div class="divider"></div>
-                <div class="hero-text">
-                    <div class="hero-title">Split any receipt in seconds</div>
-                    <div class="hero-desc">Just snap a photo during your trip. The math happens automatically.</div>
-                </div>
-                <div class="feature-list">
-                    <div class="feature"><span class="check check-purple">✓</span> Unlimited AI receipt scans for 1 trip</div>
-                    <div class="feature"><span class="check check-purple">✓</span> Smart splits (itemized, percentage, shares)</div>
-                    <div class="feature"><span class="check check-purple">✓</span> 3 months cloud sync + backup</div>
-                    <div class="feature"><span class="check check-purple">✓</span> Export trip expenses to CSV</div>
-                    <div class="feature"><span class="check check-purple">✓</span> Smart reminders — never chase payments</div>
-                </div>
-                <div class="highlight-box">
-                    <div class="highlight-text">✨ INCLUDES: 1 TRIP PASS</div>
-                    <div class="highlight-sub">Covers all receipts from start to end of trip</div>
-                </div>
-                <a href="#" class="btn btn-popular">Get Pro Traveler →</a>
-            </div>
+        <div>
+          <div class="social-text">Loved by 100K+ users</div>
+          <div class="social-stars">
+            <span class="stars" aria-label="Rated 4.8 out of 5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 1-5 5 1.2 7L12 18.3 5.8 21.6 7 14.6l-5-5 7-1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 1-5 5 1.2 7L12 18.3 5.8 21.6 7 14.6l-5-5 7-1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 1-5 5 1.2 7L12 18.3 5.8 21.6 7 14.6l-5-5 7-1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 1-5 5 1.2 7L12 18.3 5.8 21.6 7 14.6l-5-5 7-1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 1-5 5 1.2 7L12 18.3 5.8 21.6 7 14.6l-5-5 7-1z"/></svg>
+            </span>
+            <span class="rating-num">4.8</span>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <!-- CARD 3: TALLY PRO (Ultimate) -->
-        <div class="card">
-            <div class="card-accent accent-pro"></div>
-            <div class="card-inner">
-                <div class="plan-category">TALLY PRO</div>
-                <div class="price">
-                    <span class="price-amount">$19</span>
-                    <span class="price-period">one-time</span>
-                </div>
-                <div class="divider"></div>
-                <div class="hero-text">
-                    <div class="hero-title">Everything unlocked — forever</div>
-                    <div class="hero-desc">For power users, group organizers, and frequent travelers.</div>
-                </div>
-                <div class="feature-list">
-                    <div class="feature"><span class="check check-dark">✓</span> Unlimited AI receipt scans — lifetime</div>
-                    <div class="feature"><span class="check check-dark">✓</span> Lifetime cloud sync (all data, always)</div>
-                    <div class="feature"><span class="check check-dark">✓</span> Priority support — 24hr response</div>
-                    <div class="feature"><span class="check check-dark">✓</span> Unlimited groups & trip budgets</div>
-                    <div class="feature"><span class="check check-dark">✓</span> Multi-currency support</div>
-                    <div class="feature"><span class="check check-dark">✓</span> Advanced analytics & spend insights</div>
-                </div>
-                <a href="#" class="btn btn-pro">Go Pro →</a>
-            </div>
+    <!-- ===== PHONE STACK ===== -->
+    <div class="phone-stack" aria-hidden="true">
+
+      <!-- Decorative curves -->
+      <svg class="deco-curve left" viewBox="0 0 100 80" fill="none">
+        <path d="M5 70 Q 20 20 80 30" stroke="#22C55E" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
+        <circle cx="80" cy="30" r="3" fill="#22C55E"/>
+      </svg>
+      <svg class="deco-curve right" viewBox="0 0 80 80" fill="none">
+        <path d="M70 10 L 60 5 M 70 10 L 75 20" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <line x1="50" y1="30" x2="60" y2="20" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="deco-curve bot" viewBox="0 0 60 60" fill="none">
+        <circle cx="20" cy="20" r="3" fill="#22C55E" opacity="0.5"/>
+        <circle cx="40" cy="40" r="2" fill="#22C55E" opacity="0.5"/>
+      </svg>
+
+      <!-- Left phone — Add expense -->
+      <div class="phone left">
+        <div class="ph-screen">
+          <div class="ph-status">
+            <span>9:31</span>
+            <span class="right">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor"><rect x="0" y="5" width="2" height="3" rx="0.5"/><rect x="3" y="3" width="2" height="5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5"/><rect x="2" y="2" width="8" height="4" rx="0.5" fill="currentColor"/><rect x="12" y="3" width="1" height="2" rx="0.3" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <div class="ae-back">←  Add expense</div>
+          <div class="ae-amount-card">
+            <div class="lbl">USD</div>
+            <div class="val"><span class="cur">USD</span>120.00</div>
+          </div>
+          <div class="ae-row"><strong>Dinner at cafe</strong></div>
+          <div class="ae-row">Food & Drinks</div>
+          <div class="ae-row">May 21, 2025</div>
+          <div class="ae-row"><strong>Weekend Cabin</strong></div>
+          <div class="ae-section">Who paid & split</div>
+          <div class="ae-split">
+            <span class="pill on">Equal</span>
+            <span class="pill">Exact</span>
+            <span class="pill">Percent</span>
+          </div>
+          <div class="ae-people">
+            <div class="ae-person"><span class="av"></span> You <span style="margin-left:auto; color: var(--muted); font-weight: 500; font-size: 9px;">(paid)</span></div>
+            <div class="ae-person"><span class="av"></span> Yasmin</div>
+            <div class="ae-person"><span class="av"></span> Ali</div>
+            <div class="ae-person"><span class="av"></span> Sami</div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="footer-note">
-        Manual entry is always free on every plan. · No hidden fees · Cancel anytime
+      <!-- Center phone — Tally home -->
+      <div class="phone center">
+        <div class="ph-screen">
+          <div class="ph-status">
+            <span>9:31</span>
+            <span class="right">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor"><rect x="0" y="5" width="2" height="3" rx="0.5"/><rect x="3" y="3" width="2" height="5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5"/><rect x="2" y="2" width="8" height="4" rx="0.5" fill="currentColor"/><rect x="12" y="3" width="1" height="2" rx="0.3" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <div class="ch-hd">
+            <div class="ch-title">Tally</div>
+            <div class="ch-icons">
+              <span class="ch-bell">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              </span>
+              <span class="ch-pic"></span>
+            </div>
+          </div>
+          <div class="ch-banner">
+            <div class="lbl">You're owed</div>
+            <div class="val">USD 133.33</div>
+            <div class="sub">Across 3 groups</div>
+            <div class="wallet">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="17" cy="13" r="1.5" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="ch-mini-row">
+            <div class="ch-mini owed"><div class="lbl"><span class="ic"></span>You are owed</div><div class="val">USD 133.33</div></div>
+            <div class="ch-mini owe"><div class="lbl"><span class="ic"></span>You owe</div><div class="val">USD 0.00</div></div>
+          </div>
+          <div class="ch-section-row">
+            <div class="ch-section-title">Your groups</div>
+            <div class="ch-section-link">View all</div>
+          </div>
+
+          <div class="ch-group">
+            <div class="ch-group-top">
+              <span class="ch-group-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              </span>
+              <div class="ch-group-body">
+                <div class="ch-group-name">Weekend Cabin</div>
+                <div class="ch-group-meta">You are owed <span class="ow">USD 133.33</span></div>
+              </div>
+            </div>
+            <div class="ch-mems">
+              <span class="mem">Y</span><span class="mem">A</span><span class="mem">M</span><span class="mem">S</span><span class="mem plus">+1</span>
+            </div>
+          </div>
+          <div class="ch-group">
+            <div class="ch-group-top">
+              <span class="ch-group-icon" style="background: #FEF3C7;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </span>
+              <div class="ch-group-body">
+                <div class="ch-group-name">Trip to Dubai</div>
+                <div class="ch-group-meta">You are owed <span class="ow">USD 45.20</span></div>
+              </div>
+            </div>
+            <div class="ch-mems">
+              <span class="mem">P</span><span class="mem">A</span><span class="mem">J</span><span class="mem plus">+2</span>
+            </div>
+          </div>
+          <div class="ch-group">
+            <div class="ch-group-top">
+              <span class="ch-group-icon" style="background: #DBEAFE;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </span>
+              <div class="ch-group-body">
+                <div class="ch-group-name">Roommates</div>
+                <div class="ch-group-meta">You owe <span class="ow" style="color:#DC2626;">USD 20.00</span></div>
+              </div>
+            </div>
+            <div class="ch-mems">
+              <span class="mem">K</span><span class="mem">S</span><span class="mem">M</span><span class="mem plus">+1</span>
+            </div>
+          </div>
+
+          <div class="ch-tabbar">
+            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</span>
+            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Groups</span>
+            <span class="tab add"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Activity</span>
+            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0 1 16 0"/></svg>Account</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right phone — AI Receipt -->
+      <div class="phone right">
+        <div class="ph-screen">
+          <div class="ph-status">
+            <span>9:31</span>
+            <span class="right">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor"><rect x="0" y="5" width="2" height="3" rx="0.5"/><rect x="3" y="3" width="2" height="5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5"/><rect x="2" y="2" width="8" height="4" rx="0.5" fill="currentColor"/><rect x="12" y="3" width="1" height="2" rx="0.3" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <div class="ar-hd">
+            <span class="ar-title">AI Receipt</span>
+            <span class="ar-prem-pill">★ Premium</span>
+          </div>
+          <div class="ar-section">Choose input method</div>
+          <div class="ar-inputs">
+            <div class="ar-input on">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Photo
+            </div>
+            <div class="ar-input">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+              Text
+            </div>
+            <div class="ar-input">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+              Voice
+            </div>
+          </div>
+          <div class="ar-section-2">Items & split</div>
+          <div class="ar-list-item">
+            <span class="ic"></span>
+            <span class="body">Pizza Margherita<small>You · 2 shares</small></span>
+            <span class="amt">USD 30.00</span>
+          </div>
+          <div class="ar-list-item">
+            <span class="ic" style="background: #FEF3C7;"></span>
+            <span class="body">Pasta Bolognese<small>Yasmin</small></span>
+            <span class="amt">USD 30.00</span>
+          </div>
+          <div class="ar-list-item">
+            <span class="ic" style="background: #DBEAFE;"></span>
+            <span class="body">Tiramisu<small>Voice tag</small></span>
+            <span class="amt">USD 30.00</span>
+          </div>
+          <div class="ar-list-item">
+            <span class="ic" style="background: #FEE2E2;"></span>
+            <span class="body">Espresso x4<small>All</small></span>
+            <span class="amt">USD 30.00</span>
+          </div>
+          <div class="ar-total">
+            <span>Total · USD</span>
+            <span>120.00</span>
+          </div>
+          <div class="ar-cta">Review items</div>
+        </div>
+      </div>
     </div>
-    <div class="brand">
-        PILL FAB | +
+  </div>
+</section>
+
+<!-- ============================== TRUST STRIP ============================== -->
+<div class="container" id="features">
+  <div class="trust" id="security">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="trust-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9.4 8 10 4.5-.6 8-5 8-10V6z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </span>
+        <div class="trust-text">
+          <h4>Bank-level security</h4>
+          <p>Your data is encrypted and always protected.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        </span>
+        <div class="trust-text">
+          <h4>Cloud sync</h4>
+          <p>Access your groups anywhere, anytime.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <div class="trust-text">
+          <h4>Made for groups</h4>
+          <p>Trips, roommates, friends, events and more.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </span>
+        <div class="trust-text">
+          <h4>Privacy first</h4>
+          <p>We never sell your personal data.</p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<!-- ============================== HOW IT WORKS ============================== -->
+<section class="block" id="how">
+  <div class="container">
+    <div class="section-head">
+      <h2>How Tally works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-ico">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="step-num">1</span>
+        </div>
+        <h3>Create or join a group</h3>
+        <p>Invite your friends and start tracking together.</p>
+      </div>
+      <div class="step">
+        <div class="step-ico">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+          <span class="step-num">2</span>
+        </div>
+        <h3>Add expenses</h3>
+        <p>Snap a receipt, type it in, or use voice with AI.</p>
+      </div>
+      <div class="step">
+        <div class="step-ico">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          <span class="step-num">3</span>
+        </div>
+        <h3>Split automatically</h3>
+        <p>Choose a split method and Tally does the math.</p>
+      </div>
+      <div class="step">
+        <div class="step-ico">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><circle cx="18" cy="13" r="2"/></svg>
+          <span class="step-num">4</span>
+        </div>
+        <h3>Settle up easily</h3>
+        <p>See who owes who and settle in fewer payments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PRICING ============================== -->
+<section class="block" id="passes" style="padding-top: 24px;">
+  <div class="container">
+    <div class="section-head">
+      <h2>Choose the pass that fits your plans</h2>
+      <p>No subscriptions. Pay only when you need premium.</p>
+    </div>
+
+    <div class="passes-grid">
+
+      <!-- Night Out Pass -->
+      <div class="pass">
+        <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M20 25 L80 25 L52 60 V85 H62 V90 H38 V85 H48 V60 Z" stroke="#16A34A" stroke-width="2.5" stroke-linejoin="round" fill="#FBBF24" fill-opacity="0.85"/>
+          <circle cx="74" cy="20" r="3" fill="#22C55E"/>
+          <path d="M65 12 L72 14" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M30 18 L26 11" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="pass-name">Night Out Pass</div>
+        <p class="pass-desc">Perfect for dinners and one-off events.</p>
+        <div class="pass-price"><span class="amt">$1.99</span><span class="per">one-time</span></div>
+        <ul class="pass-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited receipt scans (24h)</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Premium split modes</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Event sync &amp; smart settle-up</li>
+        </ul>
+        <a href="#get" class="pass-cta">Get Night Pass</a>
+      </div>
+
+      <!-- Trip Pass — highlighted -->
+      <div class="pass hl">
+        <span class="pass-badge">Best Value</span>
+        <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <rect x="20" y="36" width="60" height="48" rx="6" fill="#FBBF24" stroke="#15803D" stroke-width="2.5"/>
+          <rect x="38" y="22" width="24" height="14" rx="3" fill="none" stroke="#15803D" stroke-width="2.5"/>
+          <line x1="20" y1="56" x2="80" y2="56" stroke="#15803D" stroke-width="2"/>
+          <line x1="50" y1="36" x2="50" y2="84" stroke="#15803D" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="32" cy="84" r="3" fill="#15803D"/>
+          <circle cx="68" cy="84" r="3" fill="#15803D"/>
+        </svg>
+        <div class="pass-name">Trip Pass</div>
+        <p class="pass-desc">Ideal for trips and weekend getaways.</p>
+        <div class="pass-price"><span class="amt">$5.99</span><span class="per">one-time</span></div>
+        <ul class="pass-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 25 receipt scans</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Advanced split modes</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Smart settle-up</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Shared trip budgets</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Cloud sync during trip</li>
+        </ul>
+        <a href="#get" class="pass-cta">Get Trip Pass</a>
+      </div>
+
+      <!-- Explorer Pass — purple -->
+      <div class="pass purple">
+        <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="32" fill="#A855F7" fill-opacity="0.15" stroke="#9333EA" stroke-width="2.5"/>
+          <ellipse cx="50" cy="50" rx="14" ry="32" fill="none" stroke="#9333EA" stroke-width="2"/>
+          <line x1="18" y1="50" x2="82" y2="50" stroke="#9333EA" stroke-width="2"/>
+          <path d="M28 36 Q 50 30 72 36" stroke="#9333EA" stroke-width="1.6" fill="none"/>
+          <path d="M28 64 Q 50 70 72 64" stroke="#9333EA" stroke-width="1.6" fill="none"/>
+        </svg>
+        <div class="pass-name">Explorer Pass</div>
+        <p class="pass-desc">For power users and frequent travelers.</p>
+        <div class="pass-price"><span class="amt">$14.99</span><span class="per">one-time</span></div>
+        <ul class="pass-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 100 receipt scans</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> All premium features</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Priority processing</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Backup &amp; exports</li>
+        </ul>
+        <a href="#get" class="pass-cta">Get Explorer Pass</a>
+      </div>
+
+      <!-- Add-on -->
+      <div class="addon">
+        <div class="addon-label">Add-on</div>
+        <div class="addon-name">Scan Boost</div>
+        <p class="addon-desc">Need a few more?</p>
+        <div class="addon-price-row">
+          <div class="addon-price-info">
+            5 extra scans
+            <strong>$0.99</strong>
+          </div>
+          <svg class="addon-illust" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+            <path d="M14 8 L46 8 L46 56 L40 52 L34 56 L28 52 L22 56 L14 52 Z" fill="#FEF3C7" stroke="#B45309" stroke-width="2" stroke-linejoin="round"/>
+            <line x1="20" y1="20" x2="40" y2="20" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="20" y1="28" x2="36" y2="28" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="20" y1="36" x2="40" y2="36" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <a href="#get" class="addon-cta">Add to cart</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="block" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need an account to use Tally?</summary>
+        <div class="answer">No. Tally works fully offline using local storage on your phone. Sign in only when you want your data to follow you across devices.</div>
+      </details>
+      <details>
+        <summary>Is there a recurring subscription?</summary>
+        <div class="answer">Never. Tally uses one-time Passes — buy a Night Out, Trip, or Explorer Pass when you actually need premium tools. We never auto-renew.</div>
+      </details>
+      <details>
+        <summary>What's in the free tier?</summary>
+        <div class="answer">Unlimited groups, unlimited expenses, equal splits, live balances, and the settle-up view. AI receipt scanning, advanced splits, and cloud sync are unlocked by a Pass.</div>
+      </details>
+      <details>
+        <summary>Which currencies and languages are supported?</summary>
+        <div class="answer">Track expenses in any major currency. The app interface is available in English, Spanish, and Persian — with full right-to-left layout support.</div>
+      </details>
+      <details>
+        <summary>What happens to my data when a Pass expires?</summary>
+        <div class="answer">Everything stays. Your groups, expenses, balances, and old splits remain editable. Only premium tools — AI scanning, advanced splits on new expenses — pause until you extend.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CTA BANNER ============================== -->
+<section style="padding-bottom: 80px;">
+  <div class="container">
+    <div class="cta">
+      <svg class="cta-illust" viewBox="0 0 280 160" fill="none" aria-hidden="true">
+        <!-- left person -->
+        <circle cx="60" cy="55" r="14" fill="#1F2937"/>
+        <path d="M40 130 Q 40 88 60 88 Q 80 88 80 130 Z" fill="#22C55E"/>
+        <rect x="38" y="118" width="44" height="20" rx="3" fill="#15803D"/>
+        <path d="M70 70 L85 50" stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="88" cy="48" r="5" fill="#FBBF24"/>
+
+        <!-- middle person -->
+        <circle cx="140" cy="50" r="14" fill="#374151"/>
+        <path d="M120 130 Q 120 80 140 80 Q 160 80 160 130 Z" fill="#86EFAC"/>
+        <rect x="118" y="118" width="44" height="20" rx="3" fill="#22C55E"/>
+        <path d="M122 65 L100 48" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
+        <path d="M158 65 L182 48" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="98" cy="46" r="5" fill="#FBBF24"/>
+        <circle cx="184" cy="46" r="5" fill="#FBBF24"/>
+
+        <!-- right person -->
+        <circle cx="220" cy="55" r="14" fill="#1F2937"/>
+        <path d="M200 130 Q 200 88 220 88 Q 240 88 240 130 Z" fill="#10B981"/>
+        <rect x="198" y="118" width="44" height="20" rx="3" fill="#0F766E"/>
+        <path d="M210 70 L195 50" stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="192" cy="48" r="5" fill="#FBBF24"/>
+
+        <!-- spark accents -->
+        <path d="M30 30 L36 30 M33 27 L33 33" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <path d="M254 36 L260 36 M257 33 L257 39" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="248" cy="14" r="2" fill="#22C55E"/>
+        <circle cx="20" cy="100" r="2" fill="#22C55E"/>
+      </svg>
+      <div class="cta-text">
+        <h2>Ready to make splitting simple?</h2>
+        <p>Join thousands of groups who trust Tally to keep things fair and stress-free.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#get" class="nav-cta">Get Tally Free</a>
+        <span class="free-line">Free forever for manual entry</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="brand">
+          <svg class="brand-mark" viewBox="0 0 32 32" fill="none">
+            <rect x="3" y="6" width="13" height="3" rx="1.5" fill="#22C55E"/>
+            <rect x="3" y="12" width="20" height="3" rx="1.5" fill="#22C55E"/>
+            <rect x="3" y="18" width="9" height="3" rx="1.5" fill="#22C55E"/>
+            <rect x="3" y="24" width="16" height="3" rx="1.5" fill="#22C55E"/>
+            <circle cx="26" cy="7.5" r="2.2" fill="#16A34A"/>
+            <circle cx="26" cy="13.5" r="2.2" fill="#16A34A"/>
+          </svg>
+          <span>Tally</span>
+        </a>
+        <p>Split expenses. Not friendships. Track shared spending with friends, roommates, and travel buddies.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#passes">Passes</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4>Get the app</h4>
+          <a href="https://apps.apple.com/app/id0000000000" target="_blank" rel="noopener">App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.payamqorbanpour.tally" target="_blank" rel="noopener">Google Play</a>
+        </div>
+        <div class="foot-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="mailto:support@tally.app">Support</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Tally. All rights reserved.</span>
+      <span>Made with care for groups that hate spreadsheets.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>

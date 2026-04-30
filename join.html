@@ -77,8 +77,8 @@
 <body>
   <main class="card" role="main">
     <div class="logo" aria-hidden="true">T</div>
-    <h1>You're invited to a group on Tally</h1>
-    <p class="lede">Open the app to accept the invite and start splitting expenses with your friends.</p>
+    <h1 id="title">You're invited to a group on Tally</h1>
+    <p class="lede" id="lede">Open the app to accept the invite and start splitting expenses with your friends.</p>
 
     <a id="open" class="btn btn-primary" href="#">Open in Tally</a>
 
@@ -100,16 +100,32 @@
         ? null
         : parts[parts.length - 1] || null;
 
+      // Optional ?e=<expense_id> (alias: ?expense=) — when present the link
+      // both joins the group and opens that expense. The app should add the
+      // user to the group first (if not already a member) and then route to
+      // the expense.
+      var qs = new URLSearchParams(window.location.search);
+      var expenseId = qs.get("e") || qs.get("expense") || null;
+
       if (!token) {
-        document.querySelector("h1").textContent = "Invalid invite link";
-        document.querySelector(".lede").textContent = "This invite link is missing its token. Ask your friend to resend it.";
+        document.getElementById("title").textContent = "Invalid invite link";
+        document.getElementById("lede").textContent = "This invite link is missing its token. Ask your friend to resend it.";
         document.getElementById("open").style.display = "none";
         return;
       }
 
       var deepLink = "tally://group-invite?token=" + encodeURIComponent(token);
+      var tokenLine = "Token: " + token;
+      if (expenseId) {
+        deepLink += "&expense=" + encodeURIComponent(expenseId);
+        tokenLine += " · Expense: " + expenseId;
+        document.getElementById("title").textContent =
+          "You're invited to a group and an expense on Tally";
+        document.getElementById("lede").textContent =
+          "Open the app to join the group and jump straight to this expense.";
+      }
       document.getElementById("open").setAttribute("href", deepLink);
-      document.getElementById("tokenLine").textContent = "Token: " + token;
+      document.getElementById("tokenLine").textContent = tokenLine;
 
       // Try to launch the app on first paint. iOS Universal Links (when AASA is
       // verified) intercept this URL before the page even renders, so this code
