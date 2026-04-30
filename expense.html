@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="noindex" />
   <title>Open expense in Tally</title>
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
   <style>
     :root {
       --brand: #0E494E;
@@ -38,13 +39,11 @@
       text-align: center;
     }
     .logo {
-      width: 72px; height: 72px;
+      width: 80px; height: 80px;
       margin: 0 auto 18px;
       border-radius: 18px;
-      background: var(--brand);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 32px; letter-spacing: -1px;
+      object-fit: cover;
+      display: block;
     }
     h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
     p.lede { color: var(--muted); font-size: 15px; line-height: 1.45; margin-bottom: 22px; }
@@ -76,7 +75,7 @@
 </head>
 <body>
   <main class="card" role="main">
-    <div class="logo" aria-hidden="true">T</div>
+    <img class="logo" src="/assets/icon.png" alt="Tally" />
     <h1 id="title">Shared expense on Tally</h1>
     <p class="lede" id="lede">Open the app to view this expense and settle up with your group. If you're not in the group yet, Tally will add you.</p>
 

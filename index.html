@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Tally — Split expenses. Not friendships.</title>
-  <meta name="description" content="Tally helps groups track expenses, split fairly, and settle up in seconds. No spreadsheets. No awkwardness. Just simple." />
-  <meta name="theme-color" content="#22C55E" />
-  <link rel="icon" href="/favicon.ico" />
+  <title>Tally — Share Bills. Keep Friends.</title>
+  <meta name="description" content="Tally helps groups split bills, scan receipts with AI, and settle up with the fewest possible payments. Share bills. Keep friends." />
+  <meta name="theme-color" content="#0E494E" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon.png" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Tally — Split expenses. Not friendships." />
-  <meta property="og:description" content="Track expenses, split fairly, and settle up in seconds. No spreadsheets. No awkwardness." />
+  <meta property="og:title" content="Tally — Share Bills. Keep Friends." />
+  <meta property="og:description" content="Split bills, scan receipts with AI, and settle up with the fewest payments. No subscription — pay-once Passes." />
 
   <style>
     :root {
+      --brand-deep:   #0E494E;
+      --brand-deep-2: #0A3539;
       --green:        #22C55E;
       --green-2:      #16A34A;
       --green-3:      #15803D;
@@ -100,8 +103,10 @@
       flex-shrink: 0;
     }
     .brand-mark {
-      width: 32px; height: 32px;
+      width: 36px; height: 36px;
       flex-shrink: 0;
+      border-radius: 8px;
+      object-fit: cover;
     }
     .nav-mid {
       display: flex;
@@ -927,6 +932,51 @@
       line-height: 1.6;
     }
 
+    /* ============== BRAND PANEL ============== */
+    .brand-panel {
+      background: linear-gradient(160deg, var(--brand-deep) 0%, var(--brand-deep-2) 100%);
+      border-radius: 28px;
+      padding: 72px 32px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-panel::before {
+      content: "";
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(43, 166, 120, 0.22), transparent 60%);
+      pointer-events: none;
+    }
+    .brand-panel-img {
+      position: relative;
+      max-width: 360px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.25));
+    }
+    .brand-panel-tagline {
+      position: relative;
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.65);
+      letter-spacing: 0.3px;
+    }
+    .brand-spark {
+      position: absolute;
+      color: rgba(43, 166, 120, 0.55);
+      pointer-events: none;
+    }
+    .brand-spark.s1 { top: 18%; left: 14%; }
+    .brand-spark.s2 { bottom: 22%; right: 16%; }
+    .brand-spark.s3 { top: 26%; right: 22%; }
+    .brand-spark.s4 { bottom: 30%; left: 20%; }
+
     /* ============== CTA BANNER ============== */
     .cta {
       background: var(--green-soft);
@@ -1030,6 +1080,11 @@
       .phone { width: 200px; height: 420px; }
       .phone-stack { height: 460px; }
       .trust { padding: 24px 22px; }
+      .brand-panel { padding: 56px 24px; }
+      .brand-panel-mark { width: 92px; height: 92px; }
+      .brand-panel-mark svg { width: 60px; height: 60px; }
+      .brand-panel-wordmark { font-size: 44px; }
+      .brand-panel-slogan { font-size: 16px; }
     }
     @media (max-width: 480px) {
       .container { padding: 0 18px; }
@@ -1044,14 +1099,7 @@
 <header class="nav">
   <div class="container nav-inner">
     <a href="/" class="brand" aria-label="Tally home">
-      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <rect x="3" y="6" width="13" height="3" rx="1.5" fill="#22C55E"/>
-        <rect x="3" y="12" width="20" height="3" rx="1.5" fill="#22C55E"/>
-        <rect x="3" y="18" width="9" height="3" rx="1.5" fill="#22C55E"/>
-        <rect x="3" y="24" width="16" height="3" rx="1.5" fill="#22C55E"/>
-        <circle cx="26" cy="7.5" r="2.2" fill="#16A34A"/>
-        <circle cx="26" cy="13.5" r="2.2" fill="#16A34A"/>
-      </svg>
+      <img class="brand-mark" src="/assets/icon.png" alt="" aria-hidden="true" />
       <span>Tally</span>
     </a>
     <nav class="nav-mid">
@@ -1076,10 +1124,10 @@
         <span class="spark">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2zm6 12l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1 1-2.4z"/></svg>
         </span>
-        The intelligent way to split expenses
+        The smart way to split with friends
       </span>
-      <h1>Split expenses.<br>Not <span class="friend">friendships</span>.</h1>
-      <p class="lede">Tally helps groups track expenses, split fairly, and settle up in seconds. No spreadsheets. No awkwardness. Just simple.</p>
+      <h1>Share bills.<br>Keep <span class="friend">friends</span>.</h1>
+      <p class="lede">Tally splits the dinner, the trip, and the rent — without the awkward math. Snap a receipt, settle in fewer payments, never chase a friend for $4 again.</p>
       <div class="store-row" id="get">
         <a class="store-btn" href="https://apps.apple.com/app/id0000000000" target="_blank" rel="noopener" aria-label="Download Tally on the App Store">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 12.5c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.8 0-1.9-.9-3.1-.9-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.6.8 1.2 1.7 2.5 3 2.5 1.2-.1 1.6-.8 3.1-.8s1.8.8 3.1.8c1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1-.1-2.6-1-2.6-3.6zM14 4.7c.7-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.2 1.9-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg>
@@ -1154,7 +1202,7 @@
           <div class="ae-row"><strong>Dinner at cafe</strong></div>
           <div class="ae-row">Food & Drinks</div>
           <div class="ae-row">May 21, 2025</div>
-          <div class="ae-row"><strong>Weekend Cabin</strong></div>
+          <div class="ae-row"><strong>Last Night</strong></div>
           <div class="ae-section">Who paid & split</div>
           <div class="ae-split">
             <span class="pill on">Equal</span>
@@ -1209,10 +1257,10 @@
           <div class="ch-group">
             <div class="ch-group-top">
               <span class="ch-group-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
               </span>
               <div class="ch-group-body">
-                <div class="ch-group-name">Weekend Cabin</div>
+                <div class="ch-group-name">Last Night</div>
                 <div class="ch-group-meta">You are owed <span class="ow">USD 133.33</span></div>
               </div>
             </div>
@@ -1226,7 +1274,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </span>
               <div class="ch-group-body">
-                <div class="ch-group-name">Trip to Dubai</div>
+                <div class="ch-group-name">Trip to Italy</div>
                 <div class="ch-group-meta">You are owed <span class="ow">USD 45.20</span></div>
               </div>
             </div>
@@ -1237,10 +1285,10 @@
           <div class="ch-group">
             <div class="ch-group-top">
               <span class="ch-group-icon" style="background: #DBEAFE;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
               </span>
               <div class="ch-group-body">
-                <div class="ch-group-name">Roommates</div>
+                <div class="ch-group-name">Apartment 4B</div>
                 <div class="ch-group-meta">You owe <span class="ow" style="color:#DC2626;">USD 20.00</span></div>
               </div>
             </div>
@@ -1535,6 +1583,26 @@
   </div>
 </section>
 
+<!-- ============================== BRAND PANEL ============================== -->
+<section style="padding: 32px 0;">
+  <div class="container">
+    <div class="brand-panel">
+      <svg class="brand-spark s1" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.5 5L19 8l-5 1.5L12 15l-1.5-5.5L5 8l5.5-1z"/></svg>
+      <svg class="brand-spark s2" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.5 5L19 8l-5 1.5L12 15l-1.5-5.5L5 8l5.5-1z"/></svg>
+      <svg class="brand-spark s3" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.5 5L19 8l-5 1.5L12 15l-1.5-5.5L5 8l5.5-1z"/></svg>
+      <svg class="brand-spark s4" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.5 5L19 8l-5 1.5L12 15l-1.5-5.5L5 8l5.5-1z"/></svg>
+      <img
+        class="brand-panel-img"
+        src="/assets/Tally-Slogan.png"
+        alt="Tally — Share Bills. Keep Friends."
+        loading="lazy"
+        width="720" height="720"
+      />
+      <div class="brand-panel-tagline">The smart way to split with friends — no subscription, ever.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================== CTA BANNER ============================== -->
 <section style="padding-bottom: 80px;">
   <div class="container">
@@ -1587,17 +1655,10 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="/" class="brand">
-          <svg class="brand-mark" viewBox="0 0 32 32" fill="none">
-            <rect x="3" y="6" width="13" height="3" rx="1.5" fill="#22C55E"/>
-            <rect x="3" y="12" width="20" height="3" rx="1.5" fill="#22C55E"/>
-            <rect x="3" y="18" width="9" height="3" rx="1.5" fill="#22C55E"/>
-            <rect x="3" y="24" width="16" height="3" rx="1.5" fill="#22C55E"/>
-            <circle cx="26" cy="7.5" r="2.2" fill="#16A34A"/>
-            <circle cx="26" cy="13.5" r="2.2" fill="#16A34A"/>
-          </svg>
+          <img class="brand-mark" src="/assets/icon.png" alt="" aria-hidden="true" />
           <span>Tally</span>
         </a>
-        <p>Split expenses. Not friendships. Track shared spending with friends, roommates, and travel buddies.</p>
+        <p>Share bills. Keep friends. Tally tracks shared spending with friends, roommates, and travel buddies — without the awkward math.</p>
       </div>
       <div class="foot-cols">
         <div class="foot-col">
