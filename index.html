@@ -307,285 +307,71 @@
       width: 240px;
       height: 500px;
       background: #0F172A;
-      border-radius: 38px;
-      padding: 9px;
       box-shadow: var(--shadow-phone);
       z-index: 2;
     }
-    .phone::before {
+    /* iOS: rounder body, screenshot's native Dynamic Island shows through */
+    .phone.ios {
+      border-radius: 38px;
+      padding: 7px;
+    }
+    /* Android: slightly less rounded, dark top bezel masks iOS chrome from screenshot, punch-hole camera */
+    .phone.android {
+      border-radius: 26px;
+      padding: 6px 6px 6px;
+    }
+    .phone.android::before {
       content: "";
       position: absolute;
-      top: 18px; left: 50%;
-      transform: translateX(-50%);
-      width: 78px; height: 22px;
+      top: 6px; left: 6px; right: 6px;
+      height: 26px;
       background: #0F172A;
-      border-radius: 999px;
+      border-radius: 20px 20px 0 0;
+      z-index: 3;
+    }
+    .phone.android::after {
+      content: "";
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      width: 9px; height: 9px;
+      background: #1F2937;
+      border-radius: 50%;
       z-index: 4;
     }
     .ph-screen {
       width: 100%; height: 100%;
       background: #FFFFFF;
-      border-radius: 30px;
       overflow: hidden;
       position: relative;
-      padding: 44px 14px 14px;
     }
-    .ph-status {
+    .phone.ios .ph-screen { border-radius: 32px; }
+    .phone.android .ph-screen { border-radius: 20px; }
+    .phone-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .phone-os-tag {
       position: absolute;
-      top: 18px; left: 0; right: 0;
-      display: flex; justify-content: space-between;
-      padding: 0 22px;
-      font-size: 11px;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
       font-weight: 700;
-      color: var(--text);
-      z-index: 3;
-      pointer-events: none;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--bg-2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
     }
-    .ph-status .right { display: inline-flex; gap: 4px; align-items: center; opacity: 0.85; }
-
-    /* Left phone — Add expense */
     .phone.left  { left: 0;   top: 30px; transform: rotate(-7deg); z-index: 1; }
     .phone.right { right: 0;  top: 30px; transform: rotate(7deg);  z-index: 1; }
     .phone.center { z-index: 3; }
-
-    .ae-back { font-size: 14px; color: var(--text); margin-bottom: 4px; opacity: 0.7; }
-    .ae-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
-    .ae-amount-card {
-      background: #fff;
-      border: 1px solid var(--border-2);
-      border-radius: 12px;
-      padding: 14px 12px;
-      text-align: right;
-      margin-bottom: 16px;
-    }
-    .ae-amount-card .lbl { font-size: 9px; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.4px; text-transform: uppercase; text-align: left; }
-    .ae-amount-card .val { font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -0.6px; }
-    .ae-amount-card .val .cur { font-size: 12px; font-weight: 700; color: var(--muted); margin-right: 4px; }
-    .ae-row {
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border-2);
-      font-size: 11px;
-      color: var(--text-2);
-    }
-    .ae-row strong { display: block; color: var(--text); font-weight: 600; font-size: 12px; margin-bottom: 2px; }
-    .ae-section {
-      font-size: 9px; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; margin: 12px 0 6px; font-weight: 700;
-    }
-    .ae-split {
-      display: flex; gap: 4px; margin-bottom: 10px;
-    }
-    .ae-split .pill {
-      flex: 1;
-      padding: 6px 4px;
-      border-radius: 8px;
-      background: var(--bg-2);
-      font-size: 9px; font-weight: 700;
-      text-align: center;
-      color: var(--muted);
-      border: 1px solid var(--border-2);
-    }
-    .ae-split .pill.on {
-      background: var(--green-soft);
-      color: var(--green-3);
-      border-color: var(--green);
-    }
-    .ae-people { display: flex; flex-direction: column; gap: 6px; }
-    .ae-person { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text); font-weight: 600; }
-    .ae-person .av {
-      width: 22px; height: 22px; border-radius: 50%;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      flex-shrink: 0;
-    }
-    .ae-person:nth-child(2) .av { background: linear-gradient(135deg, #34d399, #10b981); }
-    .ae-person:nth-child(3) .av { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
-    .ae-person:nth-child(4) .av { background: linear-gradient(135deg, #f87171, #ec4899); }
-
-    /* Center phone — Tally home */
-    .ch-hd {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .ch-title { font-size: 18px; font-weight: 800; letter-spacing: -0.4px; }
-    .ch-icons { display: inline-flex; gap: 8px; align-items: center; }
-    .ch-bell {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--bg-2);
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    .ch-pic {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    }
-    .ch-banner {
-      background: linear-gradient(135deg, var(--green), var(--green-2));
-      color: #fff;
-      border-radius: 14px;
-      padding: 14px 14px 16px;
-      margin-bottom: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-    .ch-banner .lbl { font-size: 11px; opacity: 0.86; margin-bottom: 4px; }
-    .ch-banner .val { font-size: 22px; font-weight: 800; letter-spacing: -0.6px; }
-    .ch-banner .sub { font-size: 11px; opacity: 0.86; margin-top: 6px; }
-    .ch-banner .wallet {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      width: 44px; height: 44px;
-      background: rgba(255,255,255,0.18);
-      border-radius: 12px;
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    .ch-mini-row {
-      display: flex; gap: 8px; margin-bottom: 14px;
-    }
-    .ch-mini {
-      flex: 1;
-      background: #fff;
-      border: 1px solid var(--border-2);
-      border-radius: 10px;
-      padding: 8px 10px;
-    }
-    .ch-mini .lbl { font-size: 9px; color: var(--muted); margin-bottom: 2px; }
-    .ch-mini .val { font-size: 12px; font-weight: 800; color: var(--green-3); }
-    .ch-mini.owed .val { color: var(--green-3); }
-    .ch-mini.owe .val { color: var(--text); }
-    .ch-mini .ic {
-      display: inline-block;
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--green-soft);
-      margin-right: 4px;
-      vertical-align: middle;
-    }
-    .ch-mini.owe .ic { background: #FEE2E2; }
-    .ch-section-row {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
-    }
-    .ch-section-title { font-size: 11px; font-weight: 800; color: var(--text); }
-    .ch-section-link { font-size: 10px; color: var(--green-3); font-weight: 600; }
-    .ch-group {
-      background: #fff;
-      border: 1px solid var(--border-2);
-      border-radius: 12px;
-      padding: 10px;
-      margin-bottom: 8px;
-    }
-    .ch-group-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .ch-group-icon {
-      width: 26px; height: 26px;
-      background: var(--green-soft);
-      border-radius: 7px;
-      display: inline-flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .ch-group-body { flex: 1; min-width: 0; }
-    .ch-group-name { font-size: 11px; font-weight: 700; color: var(--text); line-height: 1.2; }
-    .ch-group-meta { font-size: 9px; color: var(--muted); margin-top: 1px; }
-    .ch-group-meta .ow { color: var(--green-3); font-weight: 700; }
-    .ch-mems { display: flex; }
-    .ch-mems .mem {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      border: 1.5px solid #fff;
-      margin-left: -5px;
-      font-size: 8px; font-weight: 700;
-      color: var(--text);
-      background: var(--bg-3);
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    .ch-mems .mem:first-child { margin-left: 0; }
-    .ch-mems .mem.plus { background: var(--green); color: #fff; }
-    .ch-tabbar {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 50px;
-      background: #fff;
-      border-top: 1px solid var(--border-2);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 0 8px;
-    }
-    .ch-tabbar .tab { font-size: 8px; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 2px; }
-    .ch-tabbar .tab.add {
-      width: 38px; height: 38px;
-      background: var(--green);
-      border-radius: 50%;
-      color: #fff;
-      align-items: center; justify-content: center;
-      box-shadow: 0 6px 12px rgba(34,197,94,0.4);
-      margin-top: -16px;
-    }
-
-    /* Right phone — AI Receipt */
-    .ar-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .ar-title { font-size: 14px; font-weight: 800; }
-    .ar-prem-pill {
-      font-size: 9px; font-weight: 800;
-      color: var(--green-3);
-      background: var(--green-soft);
-      padding: 3px 7px;
-      border-radius: 999px;
-      letter-spacing: 0.3px;
-    }
-    .ar-section { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .ar-inputs { display: flex; gap: 6px; margin-bottom: 14px; }
-    .ar-input {
-      flex: 1;
-      background: #fff;
-      border: 1px solid var(--border-2);
-      border-radius: 10px;
-      padding: 12px 4px 8px;
-      text-align: center;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .ar-input.on { background: var(--green-soft); border-color: var(--green); color: var(--green-3); }
-    .ar-input .ic {
-      display: block;
-      margin: 0 auto 6px;
-      width: 22px; height: 22px;
-    }
-    .ar-section-2 { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .ar-list-item {
-      display: flex; align-items: center; gap: 6px;
-      padding: 7px 8px;
-      background: #fff;
-      border: 1px solid var(--border-2);
-      border-radius: 8px;
-      margin-bottom: 5px;
-    }
-    .ar-list-item .ic {
-      width: 18px; height: 18px;
-      border-radius: 5px;
-      background: var(--green-soft);
-      flex-shrink: 0;
-    }
-    .ar-list-item .body { flex: 1; min-width: 0; font-size: 9px; font-weight: 600; color: var(--text); }
-    .ar-list-item .body small { display: block; font-size: 7px; color: var(--muted); font-weight: 500; }
-    .ar-list-item .amt { font-size: 9px; font-weight: 800; color: var(--text); }
-    .ar-total {
-      display: flex; justify-content: space-between;
-      padding: 8px 10px;
-      background: var(--bg-2);
-      border-radius: 8px;
-      font-size: 10px;
-      font-weight: 800;
-      margin-top: 6px;
-      margin-bottom: 12px;
-    }
-    .ar-cta {
-      background: var(--green);
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 11px;
-      font-weight: 800;
-    }
 
     /* ============== TRUST STRIP ============== */
     .trust {
@@ -1182,185 +968,28 @@
         <circle cx="40" cy="40" r="2" fill="#22C55E" opacity="0.5"/>
       </svg>
 
-      <!-- Left phone — Add expense -->
-      <div class="phone left">
+      <!-- Left phone — iOS -->
+      <div class="phone left ios">
         <div class="ph-screen">
-          <div class="ph-status">
-            <span>9:31</span>
-            <span class="right">
-              <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor"><rect x="0" y="5" width="2" height="3" rx="0.5"/><rect x="3" y="3" width="2" height="5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
-              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5"/><rect x="2" y="2" width="8" height="4" rx="0.5" fill="currentColor"/><rect x="12" y="3" width="1" height="2" rx="0.3" fill="currentColor"/></svg>
-            </span>
-          </div>
-          <div class="ae-back">←  Add expense</div>
-          <div class="ae-amount-card">
-            <div class="lbl">USD</div>
-            <div class="val"><span class="cur">USD</span>120.00</div>
-          </div>
-          <div class="ae-row"><strong>Dinner at cafe</strong></div>
-          <div class="ae-row">Food & Drinks</div>
-          <div class="ae-row">May 21, 2025</div>
-          <div class="ae-row"><strong>Last Night</strong></div>
-          <div class="ae-section">Who paid & split</div>
-          <div class="ae-split">
-            <span class="pill on">Equal</span>
-            <span class="pill">Exact</span>
-            <span class="pill">Percent</span>
-          </div>
-          <div class="ae-people">
-            <div class="ae-person"><span class="av"></span> You <span style="margin-left:auto; color: var(--muted); font-weight: 500; font-size: 9px;">(paid)</span></div>
-            <div class="ae-person"><span class="av"></span> Yasmin</div>
-            <div class="ae-person"><span class="av"></span> Ali</div>
-            <div class="ae-person"><span class="av"></span> Sami</div>
-          </div>
+          <img class="phone-img" src="/assets/ios/3.png" alt="Tally on iOS — split items per person" loading="lazy" />
         </div>
+        <span class="phone-os-tag">iOS</span>
       </div>
 
-      <!-- Center phone — Tally home -->
-      <div class="phone center">
+      <!-- Center phone — iOS -->
+      <div class="phone center ios">
         <div class="ph-screen">
-          <div class="ph-status">
-            <span>9:31</span>
-            <span class="right">
-              <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor"><rect x="0" y="5" width="2" height="3" rx="0.5"/><rect x="3" y="3" width="2" height="5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
-              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5"/><rect x="2" y="2" width="8" height="4" rx="0.5" fill="currentColor"/><rect x="12" y="3" width="1" height="2" rx="0.3" fill="currentColor"/></svg>
-            </span>
-          </div>
-          <div class="ch-hd">
-            <div class="ch-title">Tally</div>
-            <div class="ch-icons">
-              <span class="ch-bell">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-              </span>
-              <span class="ch-pic"></span>
-            </div>
-          </div>
-          <div class="ch-banner">
-            <div class="lbl">You're owed</div>
-            <div class="val">USD 133.33</div>
-            <div class="sub">Across 3 groups</div>
-            <div class="wallet">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="17" cy="13" r="1.5" fill="#fff"/></svg>
-            </div>
-          </div>
-          <div class="ch-mini-row">
-            <div class="ch-mini owed"><div class="lbl"><span class="ic"></span>You are owed</div><div class="val">USD 133.33</div></div>
-            <div class="ch-mini owe"><div class="lbl"><span class="ic"></span>You owe</div><div class="val">USD 0.00</div></div>
-          </div>
-          <div class="ch-section-row">
-            <div class="ch-section-title">Your groups</div>
-            <div class="ch-section-link">View all</div>
-          </div>
-
-          <div class="ch-group">
-            <div class="ch-group-top">
-              <span class="ch-group-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-              </span>
-              <div class="ch-group-body">
-                <div class="ch-group-name">Last Night</div>
-                <div class="ch-group-meta">You are owed <span class="ow">USD 133.33</span></div>
-              </div>
-            </div>
-            <div class="ch-mems">
-              <span class="mem">Y</span><span class="mem">A</span><span class="mem">M</span><span class="mem">S</span><span class="mem plus">+1</span>
-            </div>
-          </div>
-          <div class="ch-group">
-            <div class="ch-group-top">
-              <span class="ch-group-icon" style="background: #FEF3C7;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-              </span>
-              <div class="ch-group-body">
-                <div class="ch-group-name">Trip to Italy</div>
-                <div class="ch-group-meta">You are owed <span class="ow">USD 45.20</span></div>
-              </div>
-            </div>
-            <div class="ch-mems">
-              <span class="mem">P</span><span class="mem">A</span><span class="mem">J</span><span class="mem plus">+2</span>
-            </div>
-          </div>
-          <div class="ch-group">
-            <div class="ch-group-top">
-              <span class="ch-group-icon" style="background: #DBEAFE;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E40AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-              </span>
-              <div class="ch-group-body">
-                <div class="ch-group-name">Apartment 4B</div>
-                <div class="ch-group-meta">You owe <span class="ow" style="color:#DC2626;">USD 20.00</span></div>
-              </div>
-            </div>
-            <div class="ch-mems">
-              <span class="mem">K</span><span class="mem">S</span><span class="mem">M</span><span class="mem plus">+1</span>
-            </div>
-          </div>
-
-          <div class="ch-tabbar">
-            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</span>
-            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Groups</span>
-            <span class="tab add"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Activity</span>
-            <span class="tab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0 1 16 0"/></svg>Account</span>
-          </div>
+          <img class="phone-img" src="/assets/ios/1.png" alt="Tally on iOS — group expenses and balances" loading="lazy" />
         </div>
+        <span class="phone-os-tag">iOS</span>
       </div>
 
-      <!-- Right phone — AI Receipt -->
-      <div class="phone right">
+      <!-- Right phone — Android -->
+      <div class="phone right android">
         <div class="ph-screen">
-          <div class="ph-status">
-            <span>9:31</span>
-            <span class="right">
-              <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor"><rect x="0" y="5" width="2" height="3" rx="0.5"/><rect x="3" y="3" width="2" height="5" rx="0.5"/><rect x="6" y="1" width="2" height="7" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5"/></svg>
-              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5"/><rect x="2" y="2" width="8" height="4" rx="0.5" fill="currentColor"/><rect x="12" y="3" width="1" height="2" rx="0.3" fill="currentColor"/></svg>
-            </span>
-          </div>
-          <div class="ar-hd">
-            <span class="ar-title">AI Receipt</span>
-            <span class="ar-prem-pill">★ Premium</span>
-          </div>
-          <div class="ar-section">Choose input method</div>
-          <div class="ar-inputs">
-            <div class="ar-input on">
-              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-              Photo
-            </div>
-            <div class="ar-input">
-              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
-              Text
-            </div>
-            <div class="ar-input">
-              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
-              Voice
-            </div>
-          </div>
-          <div class="ar-section-2">Items & split</div>
-          <div class="ar-list-item">
-            <span class="ic"></span>
-            <span class="body">Pizza Margherita<small>You · 2 shares</small></span>
-            <span class="amt">USD 30.00</span>
-          </div>
-          <div class="ar-list-item">
-            <span class="ic" style="background: #FEF3C7;"></span>
-            <span class="body">Pasta Bolognese<small>Yasmin</small></span>
-            <span class="amt">USD 30.00</span>
-          </div>
-          <div class="ar-list-item">
-            <span class="ic" style="background: #DBEAFE;"></span>
-            <span class="body">Tiramisu<small>Voice tag</small></span>
-            <span class="amt">USD 30.00</span>
-          </div>
-          <div class="ar-list-item">
-            <span class="ic" style="background: #FEE2E2;"></span>
-            <span class="body">Espresso x4<small>All</small></span>
-            <span class="amt">USD 30.00</span>
-          </div>
-          <div class="ar-total">
-            <span>Total · USD</span>
-            <span>120.00</span>
-          </div>
-          <div class="ar-cta">Review items</div>
+          <img class="phone-img" src="/assets/ios/2.png" alt="Tally on Android — AI receipt scan" loading="lazy" />
         </div>
+        <span class="phone-os-tag">Android</span>
       </div>
     </div>
   </div>
