@@ -1,0 +1,73 @@
+# Dependencies
+node_modules
+
+# Build / output
+dist
+build
+web-build
+.turbo
+.cache
+
+# Expo
+.expo/
+expo-env.d.ts
+
+# Metro / watchman
+.metro-health-check*
+
+# Env and secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Test / coverage
+coverage
+.nyc_output
+
+# TypeScript
+*.tsbuildinfo
+
+# Android / iOS (prebuild or bare workflow)
+*.jks
+*.p8
+*.p12
+*.keystore
+*.key
+ios/Pods
+android/.gradle
+android/app/build
+android/build
+ios/build
+ios.zip
+*.hprof
+
+# Optional local config
+*.local
+
+# Misc
+.expo-shared/
+
+# Backup files left behind by icon / asset generators
+*.bak
+
+# Supabase CLI local state (linked project ref, pooler URL with creds)
+supabase/.temp/
+
+# Claude
+.claude
+.serena
+
+# Python
+.venv
