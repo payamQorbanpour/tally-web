@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Tally — Share Bills. Keep Friends.</title>
   <meta name="description" content="Tally helps groups split bills, scan receipts with AI, and settle up with the fewest possible payments. Share bills. Keep friends." />
-  <meta name="theme-color" content="#0E494E" />
+  <meta name="theme-color" content="#22C55E" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" href="/assets/icon.png" />
+  <link rel="preload" as="image" href="/assets/ios/web/1.webp" fetchpriority="high" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Tally — Share Bills. Keep Friends." />
@@ -15,15 +16,15 @@
 
   <style>
     :root {
-      /* Primary — Teal */
-      --brand-deep:   #0E494E;   /* Brand */
-      --brand-deep-2: #0A3539;   /* Darker shade */
-      --green:        #14686F;   /* Brand-2 (hover/secondary) */
-      --green-2:      #1F8A92;   /* Brand-light (highlights) */
-      --green-3:      #0E494E;   /* Brand (deep teal) */
-      --green-soft:   #D6ECEE;   /* Brand-50 (tinted surfaces) */
-      --green-pale:   #F5F7F7;   /* Surface */
-      --green-mint:   #D6ECEE;
+      /* Primary — Green (matches app) */
+      --brand-deep:   #15803D;   /* Deep green */
+      --brand-deep-2: #166534;   /* Darker shade */
+      --green:        #22C55E;   /* Brand (CTAs, primary) */
+      --green-2:      #16A34A;   /* Brand-2 (hover/secondary) */
+      --green-3:      #15803D;   /* Brand-deep (active text/icons) */
+      --green-soft:   #DCFCE7;   /* Tinted surfaces */
+      --green-pale:   #F0FDF4;   /* Pale surface */
+      --green-mint:   #ECFDF5;
 
       /* Accent — Violet */
       --purple:       #8B5CF6;   /* Accent */
@@ -150,7 +151,7 @@
       font-weight: 700;
       font-size: 14.5px;
       transition: background 0.15s ease, transform 0.05s ease;
-      box-shadow: 0 4px 12px rgba(31, 138, 146, 0.25);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
     }
     .nav-cta:hover { background: var(--green-2); }
     .nav-cta:active { transform: scale(0.98); }
@@ -166,7 +167,7 @@
       position: absolute;
       top: -120px; right: -120px;
       width: 480px; height: 480px;
-      background: radial-gradient(circle, rgba(31, 138, 146, 0.10), transparent 70%);
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.10), transparent 70%);
       pointer-events: none;
     }
     .hero-grid {
@@ -299,7 +300,7 @@
       position: absolute;
       width: 540px; height: 540px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(31, 138, 146, 0.12), transparent 65%);
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.12), transparent 65%);
       z-index: 0;
     }
     .deco-curve {
@@ -334,21 +335,6 @@
       height: 100%;
       object-fit: cover;
       object-position: center top;
-    }
-    .phone-os-tag {
-      position: absolute;
-      bottom: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: var(--bg-2);
-      padding: 4px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
     }
     .phone.left  { left: 0;   top: 30px; transform: rotate(-7deg); z-index: 1; }
     .phone.right { right: 0;  top: 30px; transform: rotate(7deg);  z-index: 1; }
@@ -461,7 +447,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       font-weight: 800; font-size: 12px;
       border: 3px solid #fff;
-      box-shadow: 0 2px 6px rgba(31,138,146,0.3);
+      box-shadow: 0 2px 6px rgba(34,197,94,0.3);
     }
     .step h3 {
       font-size: 16.5px;
@@ -571,7 +557,7 @@
     .pass.hl {
       background: var(--green-mint);
       border-color: var(--green);
-      box-shadow: 0 12px 28px -10px rgba(31, 138, 146, 0.30);
+      box-shadow: 0 12px 28px -10px rgba(34, 197, 94, 0.30);
     }
     .pass-badge {
       position: absolute;
@@ -585,7 +571,7 @@
       border-radius: 999px;
       letter-spacing: 0.3px;
       white-space: nowrap;
-      box-shadow: 0 4px 10px rgba(31,138,146,0.35);
+      box-shadow: 0 4px 10px rgba(34,197,94,0.35);
     }
     .pass.hl .pass-cta { background: var(--green-3); }
     .pass.hl .pass-cta:hover { background: #14532D; }
@@ -937,40 +923,37 @@
 
       <!-- Decorative curves -->
       <svg class="deco-curve left" viewBox="0 0 100 80" fill="none">
-        <path d="M5 70 Q 20 20 80 30" stroke="#1F8A92" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
-        <circle cx="80" cy="30" r="3" fill="#1F8A92"/>
+        <path d="M5 70 Q 20 20 80 30" stroke="#22C55E" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
+        <circle cx="80" cy="30" r="3" fill="#22C55E"/>
       </svg>
       <svg class="deco-curve right" viewBox="0 0 80 80" fill="none">
-        <path d="M70 10 L 60 5 M 70 10 L 75 20" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
-        <line x1="50" y1="30" x2="60" y2="20" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
+        <path d="M70 10 L 60 5 M 70 10 L 75 20" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <line x1="50" y1="30" x2="60" y2="20" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
       </svg>
       <svg class="deco-curve bot" viewBox="0 0 60 60" fill="none">
-        <circle cx="20" cy="20" r="3" fill="#1F8A92" opacity="0.5"/>
-        <circle cx="40" cy="40" r="2" fill="#1F8A92" opacity="0.5"/>
+        <circle cx="20" cy="20" r="3" fill="#22C55E" opacity="0.5"/>
+        <circle cx="40" cy="40" r="2" fill="#22C55E" opacity="0.5"/>
       </svg>
 
-      <!-- Left phone — iOS -->
-      <div class="phone left ios">
+      <!-- Left phone -->
+      <div class="phone left">
         <div class="ph-screen">
-          <img class="phone-img" src="/assets/ios/3.png" alt="Tally on iOS — split items per person" loading="lazy" />
+          <img class="phone-img" src="/assets/ios/web/3.webp" width="480" height="911" alt="Tally — split items per person" decoding="async" />
         </div>
-        <span class="phone-os-tag">iOS</span>
       </div>
 
-      <!-- Center phone — iOS -->
-      <div class="phone center ios">
+      <!-- Center phone (LCP) -->
+      <div class="phone center">
         <div class="ph-screen">
-          <img class="phone-img" src="/assets/ios/1.png" alt="Tally on iOS — group expenses and balances" loading="lazy" />
+          <img class="phone-img" src="/assets/ios/web/1.webp" width="480" height="1044" alt="Tally — group expenses and balances" fetchpriority="high" decoding="async" />
         </div>
-        <span class="phone-os-tag">iOS</span>
       </div>
 
-      <!-- Right phone — Android -->
-      <div class="phone right android">
+      <!-- Right phone -->
+      <div class="phone right">
         <div class="ph-screen">
-          <img class="phone-img" src="/assets/ios/2.png" alt="Tally on Android — AI receipt scan" loading="lazy" />
+          <img class="phone-img" src="/assets/ios/web/2.webp" width="480" height="1044" alt="Tally — AI receipt scan" decoding="async" />
         </div>
-        <span class="phone-os-tag">Android</span>
       </div>
     </div>
   </div>
@@ -1067,10 +1050,10 @@
       <!-- Night Out Pass -->
       <div class="pass">
         <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <path d="M20 25 L80 25 L52 60 V85 H62 V90 H38 V85 H48 V60 Z" stroke="#14686F" stroke-width="2.5" stroke-linejoin="round" fill="#FBBF24" fill-opacity="0.85"/>
-          <circle cx="74" cy="20" r="3" fill="#1F8A92"/>
-          <path d="M65 12 L72 14" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
-          <path d="M30 18 L26 11" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 25 L80 25 L52 60 V85 H62 V90 H38 V85 H48 V60 Z" stroke="#16A34A" stroke-width="2.5" stroke-linejoin="round" fill="#FBBF24" fill-opacity="0.85"/>
+          <circle cx="74" cy="20" r="3" fill="#22C55E"/>
+          <path d="M65 12 L72 14" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M30 18 L26 11" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <div class="pass-name">Night Out Pass</div>
         <p class="pass-desc">Perfect for dinners and one-off events.</p>
@@ -1087,12 +1070,12 @@
       <div class="pass hl">
         <span class="pass-badge">Best Value</span>
         <svg class="pass-illustration" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <rect x="20" y="36" width="60" height="48" rx="6" fill="#FBBF24" stroke="#0E494E" stroke-width="2.5"/>
-          <rect x="38" y="22" width="24" height="14" rx="3" fill="none" stroke="#0E494E" stroke-width="2.5"/>
-          <line x1="20" y1="56" x2="80" y2="56" stroke="#0E494E" stroke-width="2"/>
-          <line x1="50" y1="36" x2="50" y2="84" stroke="#0E494E" stroke-width="1.5" stroke-dasharray="3 3"/>
-          <circle cx="32" cy="84" r="3" fill="#0E494E"/>
-          <circle cx="68" cy="84" r="3" fill="#0E494E"/>
+          <rect x="20" y="36" width="60" height="48" rx="6" fill="#FBBF24" stroke="#15803D" stroke-width="2.5"/>
+          <rect x="38" y="22" width="24" height="14" rx="3" fill="none" stroke="#15803D" stroke-width="2.5"/>
+          <line x1="20" y1="56" x2="80" y2="56" stroke="#15803D" stroke-width="2"/>
+          <line x1="50" y1="36" x2="50" y2="84" stroke="#15803D" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="32" cy="84" r="3" fill="#15803D"/>
+          <circle cx="68" cy="84" r="3" fill="#15803D"/>
         </svg>
         <div class="pass-name">Trip Pass</div>
         <p class="pass-desc">Ideal for trips and weekend getaways.</p>
@@ -1207,34 +1190,40 @@
   <div class="container">
     <div class="cta">
       <svg class="cta-illust" viewBox="0 0 280 160" fill="none" aria-hidden="true">
-        <!-- left person -->
-        <circle cx="60" cy="55" r="14" fill="#1F2937"/>
-        <path d="M40 130 Q 40 88 60 88 Q 80 88 80 130 Z" fill="#1F8A92"/>
-        <rect x="38" y="118" width="44" height="20" rx="3" fill="#0E494E"/>
-        <path d="M70 70 L85 50" stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="88" cy="48" r="5" fill="#FBBF24"/>
+        <!-- Receipt behind avatars -->
+        <g transform="translate(98, 28) rotate(-6)">
+          <rect x="0" y="0" width="84" height="104" rx="6" fill="#fff" stroke="#15803D" stroke-width="2"/>
+          <line x1="12" y1="20" x2="56" y2="20" stroke="#86EFAC" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="34" x2="72" y2="34" stroke="#DCFCE7" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="46" x2="64" y2="46" stroke="#DCFCE7" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="58" x2="68" y2="58" stroke="#DCFCE7" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="78" x2="72" y2="78" stroke="#22C55E" stroke-width="3" stroke-linecap="round"/>
+          <line x1="12" y1="88" x2="44" y2="88" stroke="#22C55E" stroke-width="3" stroke-linecap="round"/>
+        </g>
 
-        <!-- middle person -->
-        <circle cx="140" cy="50" r="14" fill="#374151"/>
-        <path d="M120 130 Q 120 80 140 80 Q 160 80 160 130 Z" fill="#86EFAC"/>
-        <rect x="118" y="118" width="44" height="20" rx="3" fill="#1F8A92"/>
-        <path d="M122 65 L100 48" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
-        <path d="M158 65 L182 48" stroke="#374151" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="98" cy="46" r="5" fill="#FBBF24"/>
-        <circle cx="184" cy="46" r="5" fill="#FBBF24"/>
+        <!-- Left avatar -->
+        <g>
+          <circle cx="56" cy="98" r="30" fill="#DCFCE7" stroke="#fff" stroke-width="3"/>
+          <text x="56" y="108" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="800" fill="#15803D">Y</text>
+        </g>
 
-        <!-- right person -->
-        <circle cx="220" cy="55" r="14" fill="#1F2937"/>
-        <path d="M200 130 Q 200 88 220 88 Q 240 88 240 130 Z" fill="#10B981"/>
-        <rect x="198" y="118" width="44" height="20" rx="3" fill="#0F766E"/>
-        <path d="M210 70 L195 50" stroke="#1F2937" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="192" cy="48" r="5" fill="#FBBF24"/>
+        <!-- Center avatar (front, larger) -->
+        <g>
+          <circle cx="140" cy="118" r="36" fill="#22C55E" stroke="#fff" stroke-width="3"/>
+          <text x="140" y="129" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="30" font-weight="800" fill="#fff">A</text>
+        </g>
 
-        <!-- spark accents -->
-        <path d="M30 30 L36 30 M33 27 L33 33" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
-        <path d="M254 36 L260 36 M257 33 L257 39" stroke="#1F8A92" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="248" cy="14" r="2" fill="#1F8A92"/>
-        <circle cx="20" cy="100" r="2" fill="#1F8A92"/>
+        <!-- Right avatar -->
+        <g>
+          <circle cx="224" cy="98" r="30" fill="#DCFCE7" stroke="#fff" stroke-width="3"/>
+          <text x="224" y="108" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="800" fill="#15803D">M</text>
+        </g>
+
+        <!-- Sparkle accents -->
+        <path d="M30 30 L36 30 M33 27 L33 33" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <path d="M254 36 L260 36 M257 33 L257 39" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="248" cy="14" r="2" fill="#22C55E"/>
+        <circle cx="20" cy="100" r="2" fill="#22C55E"/>
       </svg>
       <div class="cta-text">
         <h2>Ready to make splitting simple?</h2>
